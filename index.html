@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Sergi Valverde</title>
+		<title>>{{ page.title }}</title>
 		<!-- link to main stylesheet -->
 		<link rel="stylesheet" type="text/css" href="/css/main.css">
 	</head>
@@ -16,18 +16,15 @@
         		<li><a href="/teach">Teaching</a></li>
     		</ul>
 		</nav>
-		<div class="container">
-    		<div class="blurb">
-        		<h1>Hi there, I'm Sergi Valverde!</h1>
-				<p>I'm best known as student of complex systems from the <em>Complex Systems Lab (Barcelona)</em>  
-				<a href="/about">Read more about my life...</a></p>
-    		</div><!-- /.blurb -->
+		
+		{{ content }}
+			
 		</div><!-- /.container -->
 		<footer>
-    		<ul>
-        		<li><a href="mailto:svalver@gmail.com">email</a></li>
-        		<li><a href="https://github.com/svalver">github.com/svalver</a></li>
-			</ul>
+	    		<ul>
+	        		<li><a href="mailto:svalver@gmail.com">email</a></li>
+        			<li><a href="https://github.com/svalver">github.com/svalver</a></li>
+        		</ul>
 		</footer>
 	</body>
 </html>
