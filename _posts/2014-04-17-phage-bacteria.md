@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Talk: Phage-Bacteria Infection Network: From Modularity to Nestedness"
-date: 2014-07-04
+date: 2014-04-17
 ---
 
 A conference by Sergi Valverde within the frame of the CRM Workshop [Workshop on Virus Dynamics and Evolution](http://www.crm.cat/en/Activities/Pages/ActivityFoldersAndPages/Curs%202013-2014/WKVirusDynamics/WKVirusDynamics.aspx).
@@ -18,5 +18,5 @@ which phages infect and exploit which hosts in complex communities?  Answering
 this is essential to understand the influence of viruses at the ecosystem level. 
 In a recent study, we combined network theory with empirical data to study the 
 interactions of phages and bacteria as networks rather than as isolated interactions 
-[Check the Slides] (http://www.crm.cat/en/Activities/Documents/Sergi%20Valverde.pdf).
+[Check the Slides](http://www.crm.cat/en/Activities/Documents/Sergi%20Valverde.pdf).
 

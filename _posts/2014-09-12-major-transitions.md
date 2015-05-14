@@ -9,7 +9,7 @@ A conference by Sergi Valverde within the frame of the SFI Workshop [Major Trans
 When looking at the history of technology, we see that all technologies are not of equal
 importance.  Only of a few technologies have the potential to start a new branching series 
 (for example, by increasing diversity), have a lasting impact in human life and became 
-"turning points". These  "technological transitions" correspond to times and places in 
+turning points. These technological transitions correspond to times and places in 
 the past when a large number of novel artefact forms or behaviours appeared 
 together or in rapid succession. 
 
