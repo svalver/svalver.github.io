@@ -2,7 +2,7 @@
 layout: post
 title: "Call for papers: 
 The Cultural Evolution of Technology: Evidence, Hypothesis and Theory"
-date: 2015-21-05
+date: 2015-05-21
 ---
 
 We (Enrico R. Crema, Xavier Rubio-Campillo and myself) are organising a 
