@@ -1222,11 +1222,11 @@ function updateGlobalBufferAndViews(buf) {
 
 
 var STATIC_BASE = 1024,
-    STACK_BASE = 163856,
+    STACK_BASE = 164080,
     STACKTOP = STACK_BASE,
-    STACK_MAX = 5406736,
-    DYNAMIC_BASE = 5406736,
-    DYNAMICTOP_PTR = 163824;
+    STACK_MAX = 5406960,
+    DYNAMIC_BASE = 5406960,
+    DYNAMICTOP_PTR = 164048;
 
 assert(STACK_BASE % 16 === 0, 'stack must start aligned');
 assert(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
@@ -1795,7 +1795,7 @@ function _emscripten_asm_const_iiii(code, a0, a1, a2) {
 
 
 
-// STATICTOP = STATIC_BASE + 162832;
+// STATICTOP = STATIC_BASE + 163056;
 /* global initializers */  __ATINIT__.push({ func: function() { globalCtors() } });
 
 
@@ -1806,7 +1806,7 @@ function _emscripten_asm_const_iiii(code, a0, a1, a2) {
 
 
 /* no memory initializer */
-var tempDoublePtr = 163840
+var tempDoublePtr = 164064
 assert(tempDoublePtr % 8 == 0);
 
 function copyTempFloat(ptr) { // functions, because inlining this code increases code size too much
@@ -6501,7 +6501,7 @@ function copyTempDouble(ptr) {
       return ret;
     }
 
-  var ___dso_handle=163664;
+  var ___dso_handle=163888;
 __ATEXIT__.push(flush_NO_FILESYSTEM);;
 if (ENVIRONMENT_IS_NODE) {
     _emscripten_get_now = function _emscripten_get_now_actual() {
