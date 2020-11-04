@@ -1222,11 +1222,11 @@ function updateGlobalBufferAndViews(buf) {
 
 
 var STATIC_BASE = 1024,
-    STACK_BASE = 164256,
+    STACK_BASE = 464096,
     STACKTOP = STACK_BASE,
-    STACK_MAX = 5407136,
-    DYNAMIC_BASE = 5407136,
-    DYNAMICTOP_PTR = 164224;
+    STACK_MAX = 5706976,
+    DYNAMIC_BASE = 5706976,
+    DYNAMICTOP_PTR = 464064;
 
 assert(STACK_BASE % 16 === 0, 'stack must start aligned');
 assert(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
@@ -1730,8 +1730,8 @@ Module['asm'] = function(global, env, providedBuffer) {
   ;
   // import table
   env['table'] = wasmTable = new WebAssembly.Table({
-    'initial': 34832,
-    'maximum': 34832,
+    'initial': 34864,
+    'maximum': 34864,
     'element': 'anyfunc'
   });
   // With the wasm backend __memory_base and __table_base and only needed for
@@ -1795,7 +1795,7 @@ function _emscripten_asm_const_iiii(code, a0, a1, a2) {
 
 
 
-// STATICTOP = STATIC_BASE + 163232;
+// STATICTOP = STATIC_BASE + 463072;
 /* global initializers */  __ATINIT__.push({ func: function() { globalCtors() } });
 
 
@@ -1806,7 +1806,7 @@ function _emscripten_asm_const_iiii(code, a0, a1, a2) {
 
 
 /* no memory initializer */
-var tempDoublePtr = 164240
+var tempDoublePtr = 464080
 assert(tempDoublePtr % 8 == 0);
 
 function copyTempFloat(ptr) { // functions, because inlining this code increases code size too much
@@ -6357,6 +6357,10 @@ function copyTempDouble(ptr) {
 
    
 
+  function _llvm_log2_f32(x) {
+      return Math.log(x) / Math.LN2; // TODO: Math.log2, when browser support is there
+    }
+
    
 
    
@@ -6501,7 +6505,7 @@ function copyTempDouble(ptr) {
       return ret;
     }
 
-  var ___dso_handle=164064;
+  var ___dso_handle=463904;
 __ATEXIT__.push(flush_NO_FILESYSTEM);;
 if (ENVIRONMENT_IS_NODE) {
     _emscripten_get_now = function _emscripten_get_now_actual() {
@@ -6560,6 +6564,7 @@ function intArrayToString(array) {
 // ASM_LIBRARY EXTERN PRIMITIVES: Math_max,Math_min,Math_floor,Math_ceil,Int8Array,Int32Array
 
 function nullFunc_fii(x) { abortFnPtrError(x, 'fii'); }
+function nullFunc_fiiii(x) { abortFnPtrError(x, 'fiiii'); }
 function nullFunc_i(x) { abortFnPtrError(x, 'i'); }
 function nullFunc_ii(x) { abortFnPtrError(x, 'ii'); }
 function nullFunc_iidiiii(x) { abortFnPtrError(x, 'iidiiii'); }
@@ -6603,6 +6608,7 @@ var asmLibraryArg = {
   "getTempRet0": getTempRet0,
   "abortStackOverflow": abortStackOverflow,
   "nullFunc_fii": nullFunc_fii,
+  "nullFunc_fiiii": nullFunc_fiiii,
   "nullFunc_i": nullFunc_i,
   "nullFunc_ii": nullFunc_ii,
   "nullFunc_iidiiii": nullFunc_iidiiii,
@@ -6961,6 +6967,7 @@ var asmLibraryArg = {
   "_glUseProgram": _glUseProgram,
   "_glVertexAttribPointer": _glVertexAttribPointer,
   "_glViewport": _glViewport,
+  "_llvm_log2_f32": _llvm_log2_f32,
   "_llvm_trap": _llvm_trap,
   "_llvm_trunc_f64": _llvm_trunc_f64,
   "_nanosleep": _nanosleep,
@@ -7137,6 +7144,12 @@ var dynCall_fii = Module["dynCall_fii"] = function() {
   assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
   assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
   return Module["asm"]["dynCall_fii"].apply(null, arguments)
+};
+
+var dynCall_fiiii = Module["dynCall_fiiii"] = function() {
+  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+  return Module["asm"]["dynCall_fiiii"].apply(null, arguments)
 };
 
 var dynCall_i = Module["dynCall_i"] = function() {
