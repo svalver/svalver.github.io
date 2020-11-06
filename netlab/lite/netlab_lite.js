@@ -1222,11 +1222,11 @@ function updateGlobalBufferAndViews(buf) {
 
 
 var STATIC_BASE = 1024,
-    STACK_BASE = 464704,
+    STACK_BASE = 467216,
     STACKTOP = STACK_BASE,
-    STACK_MAX = 5707584,
-    DYNAMIC_BASE = 5707584,
-    DYNAMICTOP_PTR = 464672;
+    STACK_MAX = 5710096,
+    DYNAMIC_BASE = 5710096,
+    DYNAMICTOP_PTR = 467184;
 
 assert(STACK_BASE % 16 === 0, 'stack must start aligned');
 assert(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
@@ -1795,7 +1795,7 @@ function _emscripten_asm_const_iiii(code, a0, a1, a2) {
 
 
 
-// STATICTOP = STATIC_BASE + 463680;
+// STATICTOP = STATIC_BASE + 466192;
 /* global initializers */  __ATINIT__.push({ func: function() { globalCtors() } });
 
 
@@ -1806,7 +1806,7 @@ function _emscripten_asm_const_iiii(code, a0, a1, a2) {
 
 
 /* no memory initializer */
-var tempDoublePtr = 464688
+var tempDoublePtr = 467200
 assert(tempDoublePtr % 8 == 0);
 
 function copyTempFloat(ptr) { // functions, because inlining this code increases code size too much
@@ -6357,6 +6357,15 @@ function copyTempDouble(ptr) {
 
    
 
+  function _llvm_log10_f32(x) {
+      return Math.log(x) / Math.LN10; // TODO: Math.log10, when browser support is there
+    }
+
+  function _llvm_log10_f64(a0
+  ) {
+  return _llvm_log10_f32(a0);
+  }
+
   function _llvm_log2_f32(x) {
       return Math.log(x) / Math.LN2; // TODO: Math.log2, when browser support is there
     }
@@ -6505,7 +6514,7 @@ function copyTempDouble(ptr) {
       return ret;
     }
 
-  var ___dso_handle=464512;
+  var ___dso_handle=467024;
 __ATEXIT__.push(flush_NO_FILESYSTEM);;
 if (ENVIRONMENT_IS_NODE) {
     _emscripten_get_now = function _emscripten_get_now_actual() {
@@ -6967,6 +6976,8 @@ var asmLibraryArg = {
   "_glUseProgram": _glUseProgram,
   "_glVertexAttribPointer": _glVertexAttribPointer,
   "_glViewport": _glViewport,
+  "_llvm_log10_f32": _llvm_log10_f32,
+  "_llvm_log10_f64": _llvm_log10_f64,
   "_llvm_log2_f32": _llvm_log2_f32,
   "_llvm_trap": _llvm_trap,
   "_llvm_trunc_f64": _llvm_trunc_f64,
