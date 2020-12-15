@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <script src="aframe.min.js"></script>
+    <script src="aframe-heatmap3d.js"></script>
+	<script src="stackblur.min.js"></script>
+    <script src="d3.js"></script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js">
+    </script>
+  </head>
+
+<body>
+<script type="text/javascript">    
+function renderPDF(url, canvas, options) {
+    // SEE: https://mozilla.github.io/pdf.js/examples/
+    var options = options || { scale: 1 };
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js'
+    var loadingTask = pdfjsLib.getDocument(url);
+    loadingTask.promise.then(function(pdf) {
+        pdf.getPage(1).then(function(page) {
+            console.log('loaded page');
+            var scale = 0.6;
+            var viewport = page.getViewport({ scale: scale, });
+            var ctx = canvas.getContext('2d');
+            var renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+            page.render(renderContext);
+        });
+    });
+}   
+</script> 
+
+<a-scene>    
+    <canvas id='holder' width='400' height='500' hidden='true'> </canvas>   
+    <script type="text/javascript">
+    var url =  'https://svalver.github.io/papers/PATH_HORIZON_2004.pdf';
+     renderPDF(url, document.getElementById('holder'));
+    </script> 
+    <a-entity xr="ar:true; vr:true; magicWindow: false"></a-entity>
+    <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow visible="true"></a-box>
+    <a-sky color="#ECECEC"></a-sky>
+    <a-assets>
+        <img id="fun4" src="fun_4.jpg"/>
+    </a-assets>
+   <a-plane 
+        src="#holder"
+        position="0 0 -4" 
+        rotation="0 0 0" 
+        width= "2" 
+        height= "3" 
+    ></a-plane>
+    <!-- Make the finess landscape -->
+    <a-entity	
+        id="middle"
+        aframe-heatmap3d="
+			src: #fun4;
+			srcMobile: #fun4;
+			ignoreZeroValues:false; 
+			invertElevation:false;
+			palette:parula;
+			metalness:.2;
+			roughness:0;
+			stackBlurRadius:1;		
+			stretch:true;
+			flipPalette:false; 
+			renderMode: surface;
+			scaleOpacity: false;
+			scaleOpacityMethod:log2;
+			opacityMin: 0.29; 
+			width: 2; height: 2;" scale="1 1 1">
+    </a-entity>		 
+</a-scene>
+</body>
+</html>
