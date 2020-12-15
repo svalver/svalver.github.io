@@ -19,7 +19,7 @@ function renderPDF(url, canvas, options) {
     loadingTask.promise.then(function(pdf) {
         pdf.getPage(1).then(function(page) {
             console.log('loaded page');
-            var scale = 0.6;
+            var scale = 0.8;
             var viewport = page.getViewport({ scale: scale, });
             var ctx = canvas.getContext('2d');
             var renderContext = {
@@ -37,6 +37,18 @@ function renderPDF(url, canvas, options) {
     <a-assets>
         <img id="fun4" src="fun_4.jpg"/>    
     </a-assets>
+    <a-camera>
+         <a-cursor raycaster="far:20; interval:1000; objects: .clickable"></a-cursor> 
+              <a-plane 
+                id="patentText"
+                position="0 0 -1.5" 
+                rotation="0 0 0" 
+                width= "1.5" 
+                height= "2"
+                visible="false"
+                material="src: #holder; opacity: 0.75; transparent: true"
+            ></a-plane>
+    </a-camera>
     <a-box id="patentLandmark" 
         position="-1 0.5 -3" 
         rotation="0 0 0" 
@@ -46,22 +58,9 @@ function renderPDF(url, canvas, options) {
         width="0.25" height="0.25" depth="0.25"
         event-set__enter="_event: mouseenter; _target: #patentText; visible: true"
         event-set__leave="_event: mouseleave; _target: #patentText; visible: false">
-            <a-plane 
-                id="patentText"
-                position="0 1 0" 
-                rotation="0 0 0" 
-                width= "1" 
-                height= "1.5"
-                src="#holder"
-                visible="false"
-            ></a-plane>
-    </a-box>    
+    </a-box>   
     <a-sky color="#ECECEC"></a-sky>
-  
-    <a-camera>
-         <a-cursor raycaster="far:20; interval:1000; objects: .clickable"></a-cursor>    
-    </a-camera>
-    
+
     <!-- Make the finess landscape -->
     <a-entity	
         id="patentLandscape"
@@ -87,7 +86,7 @@ function renderPDF(url, canvas, options) {
 </a-scene>
    
 <div id ="page" class="true">
-<canvas id='holder' width='400' height='500' hidden='false'></canvas>
+<canvas id='holder' width='500' height='650' hidden='false'></canvas>
 </div>
 <script type="text/javascript">
     var url =  'https://svalver.github.io/papers/PATH_HORIZON_2004.pdf';
