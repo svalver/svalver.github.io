@@ -1222,11 +1222,11 @@ function updateGlobalBufferAndViews(buf) {
 
 
 var STATIC_BASE = 1024,
-    STACK_BASE = 467216,
+    STACK_BASE = 469408,
     STACKTOP = STACK_BASE,
-    STACK_MAX = 5710096,
-    DYNAMIC_BASE = 5710096,
-    DYNAMICTOP_PTR = 467184;
+    STACK_MAX = 5712288,
+    DYNAMIC_BASE = 5712288,
+    DYNAMICTOP_PTR = 469376;
 
 assert(STACK_BASE % 16 === 0, 'stack must start aligned');
 assert(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
@@ -1730,8 +1730,8 @@ Module['asm'] = function(global, env, providedBuffer) {
   ;
   // import table
   env['table'] = wasmTable = new WebAssembly.Table({
-    'initial': 34864,
-    'maximum': 34864,
+    'initial': 35888,
+    'maximum': 35888,
     'element': 'anyfunc'
   });
   // With the wasm backend __memory_base and __table_base and only needed for
@@ -1795,7 +1795,7 @@ function _emscripten_asm_const_iiii(code, a0, a1, a2) {
 
 
 
-// STATICTOP = STATIC_BASE + 466192;
+// STATICTOP = STATIC_BASE + 468384;
 /* global initializers */  __ATINIT__.push({ func: function() { globalCtors() } });
 
 
@@ -1806,7 +1806,7 @@ function _emscripten_asm_const_iiii(code, a0, a1, a2) {
 
 
 /* no memory initializer */
-var tempDoublePtr = 467200
+var tempDoublePtr = 469392
 assert(tempDoublePtr % 8 == 0);
 
 function copyTempFloat(ptr) { // functions, because inlining this code increases code size too much
@@ -6514,7 +6514,7 @@ function copyTempDouble(ptr) {
       return ret;
     }
 
-  var ___dso_handle=467024;
+  var ___dso_handle=469216;
 __ATEXIT__.push(flush_NO_FILESYSTEM);;
 if (ENVIRONMENT_IS_NODE) {
     _emscripten_get_now = function _emscripten_get_now_actual() {
