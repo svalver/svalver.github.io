@@ -222,7 +222,7 @@ function Ea() {
   return M.startsWith("data:application/octet-stream;base64,");
 }
 var M;
-M = "demo.wasm";
+M = "nl.wasm";
 if (!Ea()) {
   var Fa = M;
   M = f.locateFile ? f.locateFile(Fa, v) : v + Fa;
