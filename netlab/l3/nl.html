@@ -90,11 +90,12 @@
 /* Style the buttons that are used to open the tab content */
 .tab button {
   background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
+ /* float: left;
   padding: 14px 16px;
+  */
+  outline: none; 
+  border: none;
+  cursor: pointer;
   transition: 0.3s;
 }
 
@@ -117,19 +118,20 @@
 }
 
 .buttons {
-  z-index: 2;
-  /*right: 0;
-  */
   display: block;
+ /*
+  z-index: 2;
+  right: 0;
   position: relative;
+ */
   font-size: 1.3em;
   letter-spacing: 0.05em;
   /*margin-top: -1.25em;*/
-
 }
 .button {
-  margin-right: 0.25em;
+ /* margin-right: 0.25em;
   display: inline-block;
+  */
   text-align: right;
 }
 
@@ -138,7 +140,7 @@
 }
 
 #try-area p {
-  margin-left: 0.2em;
+  margin-left: 0.0em;
   color: var(--gray-50);
   font-size: 0.9em;
   margin-bottom: -0.1em;
@@ -165,6 +167,23 @@
   color: #c00;
   font-weight: bold;
 }
+
+
+#try-code {
+  scrollbar-width: thin;
+  border-radius: 0.01em;
+  border: solid 1px hsl(200, 20%, 88%);
+  font-family: 'Source Code Pro', monospace;
+  font-size: 14px;
+  font-weight: 1000;
+  height: auto;
+  letter-spacing: normal;
+  line-height: 1.5em;
+  padding: 1em;
+  tab-size: 2;
+  min-width: 400px; 
+}
+
 
 </style>
 </head>
