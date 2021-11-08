@@ -246,7 +246,6 @@ System.print("ok")</div>
       // Show the current tab, and add an "active" class to the button that opened the tab
       document.getElementById(cityName).style.display = "block";
       evt.currentTarget.className += " active";
-
       // refresh network view
       netview.refresh(); 
     }
@@ -424,6 +423,7 @@ System.print("ok")</div>
 
     // --------- SPLITTER ---------
     // https://htmldom.dev/create-resizable-split-views/
+
     document.addEventListener('DOMContentLoaded', function () {
         // Query the element
         const resizer = document.getElementById('dragMe');
@@ -471,7 +471,8 @@ System.print("ok")</div>
             netview.refresh();
         };
         // Attach the handler
-        resizer.addEventListener('mousedown', mouseDownHandler);
+        // SERGI: disable 
+        // resizer.addEventListener('mousedown', mouseDownHandler);
     });
 </script>
 <script async type="text/javascript" src="nl.js"></script>
