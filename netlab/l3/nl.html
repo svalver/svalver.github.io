@@ -202,7 +202,7 @@
       <div class="tab">
         <button class="tablinks" onclick="openRightTab(event, 'try-area')" id="defaultOpen" >Code</button>
         <button class="tablinks" onclick="openRightTab(event, 'try-plot')">Plot</button>
-        <button class="tablinks" onclick="openRightTab(event, 'Histogram')">Histogram</button>
+        <button class="tablinks" onclick="openRightTab(event, 'try-histo')">Histogram</button>
       </div>
       <div id="try-area" class="tabcontent">
         <p> Enter your code below: </p>
@@ -216,6 +216,7 @@ for (i in 1..n) {
   Net.addEdge(i,i+1)
 }
 System.print("ok")</div>
+          <p> Output: </p>
           <p id="try-result">no errors</p>
           <pre><div id="try-output">...</div></pre>
       </div>
