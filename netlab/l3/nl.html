@@ -18,6 +18,8 @@
 <script type="application/javascript" src="./build/lzstring.min.js"></script>
 <link rel="stylesheet" type="text/css" href="./build/prism.css" />
 <link rel="stylesheet" type="text/css" href="./build/style.css" />
+<script src="https://cdn.plot.ly/plotly-2.6.2.min.js"></script>
+
 <style>
   .container {
       display: flex;
@@ -45,10 +47,18 @@
       /* Misc */
       align-items: top;
       display: flex;
+      justify-content: left;
   }
   #graph {
     width: 100%; 
     height: 100%;
+  }
+  .node-controls {
+    position: absolute;
+    margin: 20px;
+    width: auto;
+    left: 0px; 
+    top: 0px; 
   }
   .container__left .zoom-button {
     position: relative;
@@ -68,22 +78,114 @@
   color: #2e3838;
   background-color: #dffcff;
   }
+
+  /* Style the tab */
+.tab {
+  overflow: hidden;
+  /* border: 1px solid #ccc; */
+  background-color: #f1f1f1;
+  width: 100%; 
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.buttons {
+  z-index: 2;
+  /*right: 0;
+  */
+  display: block;
+  position: relative;
+  font-size: 1.3em;
+  letter-spacing: 0.05em;
+  /*margin-top: -1.25em;*/
+
+}
+.button {
+  margin-right: 0.25em;
+  display: inline-block;
+  text-align: right;
+}
+
+#try-area {
+  margin-bottom: 1em;
+}
+
+#try-area p {
+  margin-left: 0.2em;
+  color: var(--gray-50);
+  font-size: 0.9em;
+  margin-bottom: -0.1em;
+}
+
+#try-output {
+  scrollbar-width: thin;
+  white-space: pre;
+  overflow-x: auto;
+  font-family: var(--code);
+  font-size: 1em;
+  line-height: 1.25em;
+}
+
+#try-result {
+  display: block;
+  /*margin-top: 1.4em;
+  position: absolute;
+  right: 0;
+  */
+}
+
+#try-result.error {
+  color: #c00;
+  font-weight: bold;
+}
+
 </style>
 </head>
 <body>
 <div class="container">
-   
     <div id ="first" class="container__left">
-      <div id="graph"></div>
-      <div class="node-controls">
-        <button type="button" id="zoom-in-button" class="zoom-button zoom-in">+</button>
-        <button type="button" id="zoom-out-button" class="zoom-button zoom-out">-</button>
-      </div>
+        <div id="graph"></div>
+        <div class="node-controls">
+          <button type="button" id="zoom-in-button" class="zoom-button zoom-in">+</button>
+          <button type="button" id="zoom-out-button" class="zoom-button zoom-out">-</button>
+        </div>
     </div>
     <div class="resizer" id="dragMe"></div>
     <div id ="second" class="container__right">
-      <div id="try-area">
-        <p>enter code below</p>
+      <div>
+      <div class="tab">
+        <button class="tablinks" onclick="openRightTab(event, 'try-area')" id="defaultOpen" >Code</button>
+        <button class="tablinks" onclick="openRightTab(event, 'try-plot')">Plot</button>
+        <button class="tablinks" onclick="openRightTab(event, 'Histogram')">Histogram</button>
+      </div>
+      <div id="try-area" class="tabcontent">
         <div class="buttons">
           <a class="button" id="share">share</a>&bullet;
           <a class="button" id="try-run">run</a>
@@ -95,17 +197,40 @@ for (i in 1..n) {
 }
 System.print("ok")</div>
           <p id="try-result">no errors</p>
-          <p>code output</p>
-        <pre><div id="try-output">...</div></pre>
+          <pre><div id="try-output">...</div></pre>
       </div>
+      <div id="try-plot" class="tabcontent"></div>
+    </div>
     </div>
     <div id="copied-popup"><p>URL copied to clipboard</p></div>
 </div>
-<div> <a href="https://svalver.github.io/proj/">Netlab lite</a></div>
-
+<div> <a href="https://svalver.github.io/proj/">Netlab lite</a>
+</div>
 <script>
     var Module = {};
     var netview = {}
+    function openRightTab(evt, cityName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+
+      // refresh network view
+      netview.refresh(); 
+    }
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
     function kill_layout(s) {
         if (s.isForceAtlas2Running()) {
           s.stopForceAtlas2();
@@ -159,6 +284,7 @@ System.print("ok")</div>
               mouseWheelEnabled: false,
               doubleClickEnabled: false,
               touchEnabled: false,
+              zoomingRatio: 1.02
           }
         }
       );
@@ -177,6 +303,13 @@ System.print("ok")</div>
         netview.refresh(); 
       } // zoomIn()
     } // refresh_graph_div ()
+
+    Plotly.newPlot("try-plot", /* JSON object */ {
+            "data": [{ "y": [1, 2, 3] }],
+            "layout": { "width": 600, "height": 400}
+    })
+
+
     refresh_graph_div ();
     let graph = {
       nodes: [
@@ -185,7 +318,6 @@ System.print("ok")</div>
     };
     netview.graph.read(graph);
     netview.refresh();
-    
     // --------- NETLAB/WREN CODE EDITOR ---------------------- 
     //var run = document.querySelector("#try-run") ;
      console.log("postRun:\n");
