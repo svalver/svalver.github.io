@@ -1,0 +1,326 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Netlab lite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter&family=Source+Code+Pro&display=swap"
+  />
+<script src="./build/sigma.min.js"></script>
+<!-- script src="./build/plugins/sigma.layout.noverlap.min.js"></script !-->
+<!-- script src="./build/plugins/sigma.plugins.animate.min.js"></script !-->
+<script src="./build/plugins/sigma.layout.forceAtlas2.min.js"></script>
+<script type="application/javascript" src="./build/prism.js" data-manual></script>
+<script type="application/javascript" src="./build/codejar.js"></script>
+<script type="application/javascript" src="./build/codejar-linenumbers.js"></script>
+<script type="application/javascript" src="./build/lzstring.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./build/prism.css" />
+<link rel="stylesheet" type="text/css" href="./build/style.css" />
+<style>
+  .container {
+      display: flex;
+      /* Misc */
+      border: 1px solid #cbd5e0;
+      height: 96%;
+      width: 100%;
+  }
+  .container__left {
+      width: 75%;
+      /* Misc */
+      align-items: center;
+      display: flex;
+      justify-content: center;
+  }
+  .resizer {
+      background-color: #cbd5e0;
+      cursor: ew-resize;
+      height: 100%;
+      width: 6px;
+  }
+  .container__right {
+      /* Take the remaining width */
+      flex: 1;
+      /* Misc */
+      align-items: top;
+      display: flex;
+  }
+  #graph {
+    width: 100%; 
+    height: 100%;
+  }
+  .container__left .zoom-button {
+    position: relative;
+    cursor: pointer;
+    z-index: 10;
+    color: #222a2a;
+    background-color: rgba(67, 148, 193, 0.8);
+    font-size: 20px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #222a2a;
+    align-self: flex-end;
+    width: 35px;
+    height: 35px;
+  }
+  .container__left  .zoom-button:hover {
+  color: #2e3838;
+  background-color: #dffcff;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+   
+    <div id ="first" class="container__left">
+      <div id="graph"></div>
+      <div class="node-controls">
+        <button type="button" id="zoom-in-button" class="zoom-button zoom-in">+</button>
+        <button type="button" id="zoom-out-button" class="zoom-button zoom-out">-</button>
+      </div>
+    </div>
+    <div class="resizer" id="dragMe"></div>
+    <div id ="second" class="container__right">
+      <div id="try-area">
+        <p>enter code below</p>
+        <div class="buttons">
+          <a class="button" id="share">share</a>&bullet;
+          <a class="button" id="try-run">run</a>
+        </div>
+        <div id="try-code" class="language-lua">var n=10
+Net.create(n)
+for (i in 1..n) {
+  Net.addEdge(i,i+1)
+}
+System.print("ok")</div>
+          <p id="try-result">no errors</p>
+          <p>code output</p>
+        <pre><div id="try-output">...</div></pre>
+      </div>
+    </div>
+    <div id="copied-popup"><p>URL copied to clipboard</p></div>
+</div>
+<div> <a href="https://svalver.github.io/proj/">Netlab lite</a></div>
+
+<script>
+    var Module = {};
+    var netview = {}
+    function kill_layout(s) {
+        if (s.isForceAtlas2Running()) {
+          s.stopForceAtlas2();
+          s.killForceAtlas2(); 
+          console.log("[kill force atlas2]"); 
+        }
+    }
+    function layoutOptimize(s) {
+        kill_layout(s)
+        // https://nlinc1905.github.io/javascript,/html,/d3,/sigma,/data/visualization,/network/science/2017/03/25/how-to-build-network-graph-sigma.html
+        //Start the ForceAtlas2 algorithm to optimize network layout
+        s.startForceAtlas2({worker: false, 
+          barnesHutOptimize: false, 
+          slowDown: 1000, 
+          iterationsPerRender: 1000});
+        //Set time interval to allow layout algorithm to converge on a good state
+        var t = 0;
+        var interval = setInterval(function() {
+            t += 1;
+            if (t >= 10) {
+                clearInterval(interval);
+                kill_layout(s);
+            }
+        }, 100);
+    }
+    function refresh_graph_div() {
+      // to delete & refresh the graph
+      var g = document.querySelector('#graph');
+      var p = g.parentNode;
+      p.removeChild(g);
+      var c = document.createElement('div');
+      c.setAttribute('id', 'graph');
+      p.appendChild(c);
+      // Initialize sigma:
+      netview = new sigma(
+      {
+          renderer: {
+            container: document.getElementById('graph'),
+            type: 'canvas'
+          },
+          settings: {
+              edgeLabelSize: 'proportional',
+              minNodeSize: 1,
+              maxNodeSize: 10,
+              minEdgeSize: 0.1,
+              maxEdgeSize: 2,
+              //enableEdgeHovering: true,
+              //edgeHoverSizeRatio: 2,
+              defaultNodeType: 'border',
+              defaultNodeColor:"#fff",
+              mouseWheelEnabled: false,
+              doubleClickEnabled: false,
+              touchEnabled: false,
+          }
+        }
+      );
+      var zoomInButton = document.getElementById('zoom-in-button');
+        zoomInButton.addEventListener("click", zoomIn);
+      var zoomOutButton = document.getElementById('zoom-out-button');
+        zoomOutButton.addEventListener("click", zoomOut);
+      function zoomIn() {
+        var c = netview.camera;
+        c.goTo({ratio: c.ratio / c.settings('zoomingRatio')});
+        netview.refresh(); 
+      } // zoomIn()
+      function zoomOut() {
+        var c = netview.camera;
+        c.goTo({ratio: c.ratio * c.settings('zoomingRatio')});
+        netview.refresh(); 
+      } // zoomIn()
+    } // refresh_graph_div ()
+    refresh_graph_div ();
+    let graph = {
+      nodes: [
+              { id: "n0", label: "Netlab", x: 0, y: 0, size: 1, color: '#008cc2' },
+          ]
+    };
+    netview.graph.read(graph);
+    netview.refresh();
+    
+    // --------- NETLAB/WREN CODE EDITOR ---------------------- 
+    //var run = document.querySelector("#try-run") ;
+     console.log("postRun:\n");
+        var blocks = document.querySelectorAll('pre.snippet')
+        blocks.forEach((element) => {
+          var lang = 'lua'
+          var input_lang = element.getAttribute('data-lang')
+          if(input_lang) lang = input_lang
+          var code = document.createElement('code');
+          code.setAttribute('class', ' language-'+lang);
+          code.innerHTML = element.innerHTML;
+          element.innerHTML = '';
+         element.append(code)
+        });
+        Prism.highlightAll();
+        var try_code = document.querySelector("#try-code")
+        if(try_code) {
+          var jar_options = { tab: ' '.repeat(2) }
+          var jar = CodeJar(try_code, withLineNumbers(Prism.highlightElement), jar_options)
+          var output = document.querySelector("#try-output")
+          var result = document.querySelector("#try-result")
+          Module.print = function(text) { output.innerText += text + "\n"; }
+          Module.printErr = function(text) { output.innerText += text + "\n"; }
+          var run = document.querySelector("#try-run")
+          var share = document.querySelector("#share")
+         // var hello = document.querySelector("#try-hello")
+         // var fractal = document.querySelector("#try-fractal")
+         // var loop = document.querySelector("#try-loop")
+          var copiedPopup = document.querySelector("#copied-popup p")
+          var set_input = (content) => {
+            output.innerText = '...';
+            result.removeAttribute('class');
+            result.innerText = 'no errors';
+            jar.updateCode(content);
+          }
+          share.onclick = (e) => {
+              var code = jar.toString()
+              var compressed = LZString.compressToEncodedURIComponent(code)
+              var url = location.protocol + "//" + location.host + location.pathname + "?code=" + compressed
+              navigator.clipboard.writeText(url).then(
+                () => {
+                  copiedPopup.style.opacity = "1"
+                  setTimeout(() => {
+                    copiedPopup.style.opacity = ""
+                  }, 1000)
+                },
+                (e) => console.error(e)
+              )
+          }
+          run.onclick = (e) => {
+            if (netview.isForceAtlas2Running())
+            {
+              console.log("atlas is still running...");
+              return; 
+            }
+            console.log("run")
+            output.setAttribute('ready', '');
+            output.innerText = '';
+          //  var res = compile(jar.toString())
+            console.log( "to compile: ", jar.toString() ); 
+            var res = Module['ccall']('nl_compile', 'number', ['string'], [jar.toString()] );
+            var message = "no errors!"
+            result.removeAttribute('class');
+            if(res == 1) 
+            { 
+                //WREN_RESULT_COMPILE_ERROR
+                message = "Compile error!"
+                result.setAttribute('class', 'error');
+            } 
+            else if(res == 2) { //WREN_RESULT_RUNTIME_ERROR
+                message = "Runtime error!"
+                result.setAttribute('class', 'error');
+            }
+            result.innerText = message;
+            console.log(result);
+          }
+          var initial_code = new URLSearchParams(location.search).get("code")
+          if (initial_code !== null) {
+            initial_code = LZString.decompressFromEncodedURIComponent(initial_code)
+            set_input(initial_code)
+          }
+        }
+
+    // --------- SPLITTER ---------
+    // https://htmldom.dev/create-resizable-split-views/
+    document.addEventListener('DOMContentLoaded', function () {
+        // Query the element
+        const resizer = document.getElementById('dragMe');
+        const leftSide = resizer.previousElementSibling;
+        const rightSide = resizer.nextElementSibling;
+        // The current position of mouse
+        let x = 0;
+        let y = 0;
+        let leftWidth = 0;
+        // Handle the mousedown event
+        // that's triggered when user drags the resizer
+        const mouseDownHandler = function (e) {
+            // Get the current mouse position
+            x = e.clientX;
+            y = e.clientY;
+            leftWidth = leftSide.getBoundingClientRect().width;
+            // Attach the listeners to `document`
+            document.addEventListener('mousemove', mouseMoveHandler);
+            document.addEventListener('mouseup', mouseUpHandler);
+        };
+        const mouseMoveHandler = function (e) {
+            // How far the mouse has been moved
+            const dx = e.clientX - x;
+            const dy = e.clientY - y;
+            const newLeftWidth = ((leftWidth + dx) * 100) / resizer.parentNode.getBoundingClientRect().width;
+            leftSide.style.width = `${newLeftWidth}%`;
+            resizer.style.cursor = 'col-resize';
+            document.body.style.cursor = 'col-resize';
+            leftSide.style.userSelect = 'none';
+            leftSide.style.pointerEvents = 'none';
+            rightSide.style.userSelect = 'none';
+            rightSide.style.pointerEvents = 'none';
+        };
+        const mouseUpHandler = function () {
+            resizer.style.removeProperty('cursor');
+            document.body.style.removeProperty('cursor');
+            leftSide.style.removeProperty('user-select');
+            leftSide.style.removeProperty('pointer-events');
+            rightSide.style.removeProperty('user-select');
+            rightSide.style.removeProperty('pointer-events');
+            // Remove the handlers of `mousemove` and `mouseup`
+            document.removeEventListener('mousemove', mouseMoveHandler);
+            document.removeEventListener('mouseup', mouseUpHandler);
+            // update network view 
+            netview.refresh();
+        };
+        // Attach the handler
+        resizer.addEventListener('mousedown', mouseDownHandler);
+    });
+</script>
+<script async type="text/javascript" src="nl.js"></script>
+</body>
+</html>
