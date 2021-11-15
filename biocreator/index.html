@@ -113,10 +113,11 @@
       var share = document.getElementById("share");
       var copiedPopup = document.querySelector("#copied-popup p");
       share.onclick = (e) => {
+          console.log ("share.onclick()"); 
           var code = Module['ccall']('get_genome', 'string', ['void']);
-         // console.log ("sharing: ", code); 
-          var compressed = LZString.compressToEncodedURIComponent(code)
-          var url = location.protocol + "//" + location.host + location.pathname + "?code=" + compressed
+          console.log ("sharing: ", code); 
+          var compressed = LZString.compressToEncodedURIComponent(code);
+          var url = location.protocol + "//" + location.host + location.pathname + "?code=" + compressed;
           navigator.clipboard.writeText(url).then(
             () => {
               copiedPopup.style.opacity = "1"
