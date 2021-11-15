@@ -1,9 +1,11 @@
+<!-- biocreator client written by Sergi Valverde (2018-2021) @svalver !-->
 <!doctype html>
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
-    <title>Dear ImGui Emscripten example</title>
+    <title>Biocreator Client</title>
+    <script type="application/javascript" src="./lzstring.min.js"></script>
     <style>
         body { margin: 0; background-color: black }
         .emscripten {
@@ -25,14 +27,67 @@
             image-rendering: pixelated;
             -ms-interpolation-mode: nearest-neighbor;
         }
+        #share {
+          bottom: 80px; 
+          right: 30px; 
+          width: 30px;
+          height: 20px;
+          position: fixed;
+          justify-content: center;
+          align-items: center;
+          background-color: rgba(117, 201, 159, 0.8);
+          color: white;
+          padding: 20px;
+          font-size: 1.2rem;
+          border-radius: 2em;
+          padding: 0.5em 1.5em;
+        }
+        #copied-popup {
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          position: fixed;
+          z-index: 100;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          pointer-events: none;
+        }
+        #copied-popup p {
+          background-color: rgba(0, 0, 0, 0.8);
+          color: white;
+          padding: 20px;
+          font-size: 1.5rem;
+          border-radius: 1em;
+          padding: 0.5em 1.5em;
+          opacity: 0;
+          transition: opacity 0.1s ease-in-out;
+          /* Help Safari with blurred text */
+          transform: translateZ(0);
+        }
     </style>
   </head>
-  <body>
+  <body>  
+    <div>
     <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+    </div>
+    <div id="copied-popup"><p>URL copied to clipboard</p></div>
+    <a type="button" id="share"><img src="./share.png" width="30" height="20"/></a>
     <script type='text/javascript'>
       var Module = {
         preRun: [],
-        postRun: [],
+        postRun: [
+          function() { 
+            //console.log ("postrun")
+            var initial_code = new URLSearchParams(location.search).get("code");
+            if (initial_code !== null) {
+                initial_code = LZString.decompressFromEncodedURIComponent(initial_code)
+               // console.log("set_genome: ", initial_code);   
+                Module['ccall']('set_genome', 'void', ['string'], [initial_code]);
+            }
+          }
+        ],
         print: (function() {
             return function(text) {
                 text = Array.prototype.slice.call(arguments).join(' ');
@@ -55,9 +110,26 @@
             // no run dependencies to log
         }
       };
-      window.onerror = function() {
-        console.log("onerror: " + event);
-      };
+      var share = document.getElementById("share");
+      var copiedPopup = document.querySelector("#copied-popup p");
+      share.onclick = (e) => {
+          var code = Module['ccall']('get_genome', 'string', ['void']);
+         // console.log ("sharing: ", code); 
+          var compressed = LZString.compressToEncodedURIComponent(code)
+          var url = location.protocol + "//" + location.host + location.pathname + "?code=" + compressed
+          navigator.clipboard.writeText(url).then(
+            () => {
+              copiedPopup.style.opacity = "1"
+              setTimeout(() => {
+                copiedPopup.style.opacity = ""
+              }, 1000)
+            },
+            (e) => console.error(e)
+          )
+        }
+        window.onerror = function() {
+              console.log("onerror: " + event);
+        };
     </script>
     <script async type="text/javascript" src="index.js"></script>
   </body>
