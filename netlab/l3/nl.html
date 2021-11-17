@@ -225,7 +225,9 @@ System.print("ok")</div>
     </div>
     <div id="copied-popup"><p>URL copied to clipboard</p></div>
 </div>
-<div> <a href="https://svalver.github.io/proj/">Netlab lite</a>
+<div> 
+  <a href="https://svalver.github.io/proj/">Netlab lite</a> *  <a class="button" id="save_data">Save Data </a>
+
 </div>
 <script>
   // GLOBAL VARIABLES 
@@ -290,9 +292,9 @@ System.print("ok")</div>
         }
       );
       var zoomInButton = document.getElementById('zoom-in-button');
-        zoomInButton.addEventListener("click", zoomIn);
+      zoomInButton.addEventListener("click", zoomIn);
       var zoomOutButton = document.getElementById('zoom-out-button');
-        zoomOutButton.addEventListener("click", zoomOut);
+      zoomOutButton.addEventListener("click", zoomOut);
       function zoomIn() {
         var c = netview.camera;
         c.goTo({ratio: c.ratio / c.settings('zoomingRatio')});
@@ -481,6 +483,34 @@ System.print("ok")</div>
         // SERGI: disable 
         // resizer.addEventListener('mousedown', mouseDownHandler);
     });
+
+    // Plot.plot({"x":[1,2], "y":[3,4]})
+
+    function saveData() {
+        // var filename = UTF8ToString("data.txt");
+        // var content = UTF8ToString(c_content);
+        var res = Module['ccall']('nl_getdatacode', 'string', ['void'] );
+        // console.log(res); 
+        var gd = document.getElementById('try-plot')
+        if ('data' in gd)
+        {
+            // console.log(gd.data[0].x)
+            res += "var xc=["+ gd.data[0].x.toString()+ "]\nvar yc=[" + gd.data[0].y.toString()+"]\n";
+            res += "Plot.plot({\"x\":xc, \"y\":yc})\n";
+        }
+        var filename = "data.txt";
+        var content = res;
+        var elm = document.createElement('a');
+        elm.setAttribute('href', 'data:text/plain;charset=utf-8,'+encodeURIComponent(content));
+        elm.setAttribute('download', filename);
+        elm.style.display='none';
+        document.body.appendChild(elm);
+        elm.click();
+        document.body.removeChild(elm);
+      }
+      var saveButton = document.getElementById('save_data');
+      saveButton.addEventListener("click", saveData);
+
 </script>
 <script async type="text/javascript" src="nl.js"></script>
 </body>

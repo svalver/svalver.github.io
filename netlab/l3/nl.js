@@ -2066,6 +2066,9 @@ var ___wasm_call_ctors = Module["___wasm_call_ctors"] = createExportWrapper("__w
 var _nl_init = Module["_nl_init"] = createExportWrapper("nl_init");
 
 /** @type {function(...*):?} */
+var _nl_getdatacode = Module["_nl_getdatacode"] = createExportWrapper("nl_getdatacode");
+
+/** @type {function(...*):?} */
 var _nl_compile = Module["_nl_compile"] = createExportWrapper("nl_compile");
 
 /** @type {function(...*):?} */
