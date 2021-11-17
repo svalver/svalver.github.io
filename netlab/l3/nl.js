@@ -1735,8 +1735,9 @@ var ASM_CONSTS = {
 };
 function add_edge(_i,_j){ netview.graph.addEdge({ id: 'e' + Math.random(), source: _i, target: _j }); }
 function add_node(_i,_size){ netview.graph.addNode( {id: _i, x: Math.random(), y: Math.random(), size: _size, color:'#008cc2'}); }
-function clear_graph(){ refresh_graph_div (); netview.graph.read({}); netview.refresh(); }
+function clear_graph(){ kill_layout(netview); refresh_graph_div (); netview.graph.read({}); netview.refresh(); }
 function layout_graph(){ layoutOptimize (netview) ; }
+function plotxy(ptr_x,ptr_y,n){ const plotly_x_data = []; const plotly_y_data = []; for (let i =0; i < n; i++) { let val_x = getValue (ptr_x+(4*i), 'float'); plotly_x_data.push (val_x); let val_y = getValue (ptr_y+(4*i), 'float'); plotly_y_data.push (val_y); } let trace1 = { x : plotly_x_data, y: plotly_y_data, type: 'scatter' }; Plotly.newPlot ('try-plot', [trace1]); }
 function refresh_graph(){ netview.refresh(); }
 
 
@@ -2052,6 +2053,7 @@ var asmLibraryArg = {
   "emscripten_resize_heap": _emscripten_resize_heap,
   "fd_write": _fd_write,
   "layout_graph": layout_graph,
+  "plotxy": plotxy,
   "refresh_graph": refresh_graph,
   "setTempRet0": _setTempRet0,
   "time": _time
@@ -2073,10 +2075,10 @@ var _nl_done = Module["_nl_done"] = createExportWrapper("nl_done");
 var _malloc = Module["_malloc"] = createExportWrapper("malloc");
 
 /** @type {function(...*):?} */
-var ___errno_location = Module["___errno_location"] = createExportWrapper("__errno_location");
+var _fflush = Module["_fflush"] = createExportWrapper("fflush");
 
 /** @type {function(...*):?} */
-var _fflush = Module["_fflush"] = createExportWrapper("fflush");
+var ___errno_location = Module["___errno_location"] = createExportWrapper("__errno_location");
 
 /** @type {function(...*):?} */
 var stackSave = Module["stackSave"] = createExportWrapper("stackSave");
