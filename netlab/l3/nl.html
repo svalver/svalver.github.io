@@ -19,7 +19,6 @@
 <link rel="stylesheet" type="text/css" href="./build/prism.css" />
 <link rel="stylesheet" type="text/css" href="./build/style.css" />
 <script src="https://cdn.plot.ly/plotly-cartesian-2.6.2.min.js"></script>
-
 <style>
   .container {
       display: flex;
@@ -221,6 +220,7 @@ System.print("ok")</div>
           <pre><div id="try-output">...</div></pre>
       </div>
       <div id="try-plot" class="tabcontent"></div>
+      <div id="try-histo" class="tabcontent"></div>
     </div>
     </div>
     <div id="copied-popup"><p>URL copied to clipboard</p></div>
@@ -228,29 +228,10 @@ System.print("ok")</div>
 <div> <a href="https://svalver.github.io/proj/">Netlab lite</a>
 </div>
 <script>
+  // GLOBAL VARIABLES 
     var Module = {};
-    var netview = {}
-    function openRightTab(evt, cityName) {
-      // Declare all variables
-      var i, tabcontent, tablinks;
-      // Get all elements with class="tabcontent" and hide them
-      tabcontent = document.getElementsByClassName("tabcontent");
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-      }
-      // Get all elements with class="tablinks" and remove the class "active"
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-      // Show the current tab, and add an "active" class to the button that opened the tab
-      document.getElementById(cityName).style.display = "block";
-      evt.currentTarget.className += " active";
-      // refresh network view
-      netview.refresh(); 
-    }
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
+    var netview = {};
+  // SETUP 
     function kill_layout(s) {
         if (s.isForceAtlas2Running()) {
           s.stopForceAtlas2();
@@ -322,14 +303,17 @@ System.print("ok")</div>
         c.goTo({ratio: c.ratio * c.settings('zoomingRatio')});
         netview.refresh(); 
       } // zoomIn()
-    } // refresh_graph_div ()
-
-    Plotly.newPlot("try-plot", /* JSON object */ {
-            "data": [{ "y": [1, 2, 3] }],
-            "layout": { "width": 600, "height": 400}
-    })
-
-
+    } // refresh_graph_div () 
+    // ------------------ SETUP PLOTS ----------------------
+    Plotly.newPlot("try-histo", 
+            {"data": [],  
+            "layout": { "width": 600, "height": 400},
+            "config": {displaylogo: false}});
+    Plotly.newPlot("try-plot", /* JSON object */ 
+            {"data": [],  
+            "layout": { "width": 600, "height": 400},
+            "config": {displaylogo: false} });
+    // ----------------- SETUP NETVIEW ----------------------
     refresh_graph_div ();
     let graph = {
       nodes: [
@@ -338,7 +322,30 @@ System.print("ok")</div>
     };
     netview.graph.read(graph);
     netview.refresh();
-    // --------- NETLAB/WREN CODE EDITOR ---------------------- 
+    // --------------- TABS -------------------
+    function openRightTab(evt, cityName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+      // refresh network view
+      // netview.refresh(); 
+
+    } // openRightTab
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    // ------------- SETUP CODE EDITOR ---------------------- 
     //var run = document.querySelector("#try-run") ;
      console.log("postRun:\n");
         var blocks = document.querySelectorAll('pre.snippet')
@@ -468,7 +475,7 @@ System.print("ok")</div>
             document.removeEventListener('mousemove', mouseMoveHandler);
             document.removeEventListener('mouseup', mouseUpHandler);
             // update network view 
-            netview.refresh();
+           // netview.refresh();
         };
         // Attach the handler
         // SERGI: disable 
