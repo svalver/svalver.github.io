@@ -71,7 +71,7 @@ date {
 }
 
 .page {
-  margin: 30px 100px;
+  margin: 0 auto;
   width: 600px;
   min-height: calc(100% - 16.75em);
 }
