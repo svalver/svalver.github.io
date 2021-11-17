@@ -1734,6 +1734,7 @@ var ASM_CONSTS = {
   
 };
 function add_edge(_i,_j){ netview.graph.addEdge({ id: 'e' + Math.random(), source: _i, target: _j }); }
+function add_link(_i,_j){ netview.graph.addEdge({ id: 'e' + Math.random(), source: _i, target: _j }); }
 function add_node(_i,_size){ netview.graph.addNode( {id: _i, x: Math.random(), y: Math.random(), size: _size, color:'#008cc2'}); }
 function clear_graph(){ kill_layout(netview); refresh_graph_div (); netview.graph.read({}); netview.refresh(); }
 function layout_graph(){ layoutOptimize (netview) ; }
@@ -2046,6 +2047,7 @@ var asmLibraryArg = {
   "__cxa_throw": ___cxa_throw,
   "abort": _abort,
   "add_edge": add_edge,
+  "add_link": add_link,
   "add_node": add_node,
   "clear_graph": clear_graph,
   "clock": _clock,
