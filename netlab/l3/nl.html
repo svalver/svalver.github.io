@@ -42,7 +42,7 @@
   }
   .container__right {
       /* Take the remaining width */
-      flex: 1;
+      flex: 1; 
       /* Misc */
       align-items: top;
       display: flex;
@@ -173,7 +173,7 @@
   border-radius: 0.01em;
   border: solid 1px hsl(200, 20%, 88%);
   font-family: 'Source Code Pro', monospace;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 1000;
   height: auto;
   letter-spacing: normal;
@@ -181,6 +181,8 @@
   padding: 1em;
   tab-size: 2;
   min-width: 400px; 
+  max-width: 600px; 
+  max-height: 400px; 
 }
 
 
@@ -201,7 +203,7 @@
       <div class="tab">
         <button class="tablinks" onclick="openRightTab(event, 'try-area')" id="defaultOpen" >Code</button>
         <button class="tablinks" onclick="openRightTab(event, 'try-plot')">Plot</button>
-        <button class="tablinks" onclick="openRightTab(event, 'try-histo')">Histogram</button>
+        <!-- button class="tablinks" onclick="openRightTab(event, 'try-histo')">Histogram</button !-->
       </div>
       <div id="try-area" class="tabcontent">
         <p> Enter your code below: </p>
@@ -209,12 +211,13 @@
           <a class="button" id="share">share</a>&bullet;
           <a class="button" id="try-run">run</a>
         </div>
-        <div id="try-code" class="language-lua">var n=10
+        <div id="try-code" class="language-lua">
+var n=10
 Net.create(n)
 for (i in 1..n) {
   Net.addEdge(i,i+1)
 }
-System.print("ok")</div>
+</div>
           <p> Output: </p>
           <p id="try-result">no errors</p>
           <pre><div id="try-output">...</div></pre>
@@ -226,8 +229,7 @@ System.print("ok")</div>
     <div id="copied-popup"><p>URL copied to clipboard</p></div>
 </div>
 <div> 
-  <a href="https://svalver.github.io/proj/">Netlab lite</a> *  <a class="button" id="save_data">Save Data </a>
-
+  <a href="https://svalver.github.io/netlab/index.html">Netlab lite</a> *  <a class="button" id="save_data">Save Data </a>
 </div>
 <script>
   // GLOBAL VARIABLES 
@@ -253,7 +255,7 @@ System.print("ok")</div>
         var t = 0;
         var interval = setInterval(function() {
             t += 1;
-            if (t >= 10) {
+            if (t >= 15) {
                 clearInterval(interval);
                 kill_layout(s);
             }
@@ -276,8 +278,8 @@ System.print("ok")</div>
           },
           settings: {
               edgeLabelSize: 'proportional',
-              minNodeSize: 1,
-              maxNodeSize: 10,
+              minNodeSize: 0.5,
+              maxNodeSize: 2,
               minEdgeSize: 0.1,
               maxEdgeSize: 2,
               //enableEdgeHovering: true,
@@ -286,7 +288,7 @@ System.print("ok")</div>
               defaultNodeColor:"#fff",
               mouseWheelEnabled: false,
               doubleClickEnabled: false,
-              touchEnabled: false,
+              touchEnabled: true,
               zoomingRatio: 1.02
           }
         }
@@ -307,11 +309,13 @@ System.print("ok")</div>
       } // zoomIn()
     } // refresh_graph_div () 
     // ------------------ SETUP PLOTS ----------------------
-    Plotly.newPlot("try-histo", 
+ /*   Plotly.newPlot("try-histo", 
             {"data": [],  
             "layout": { "width": 600, "height": 400},
             "config": {displaylogo: false}});
-    Plotly.newPlot("try-plot", /* JSON object */ 
+            */
+
+    Plotly.newPlot("try-plot",
             {"data": [],  
             "layout": { "width": 600, "height": 400},
             "config": {displaylogo: false} });
@@ -342,8 +346,9 @@ System.print("ok")</div>
       document.getElementById(cityName).style.display = "block";
       evt.currentTarget.className += " active";
       // refresh network view
-      // netview.refresh(); 
-
+      if (typeof netview.refresh === "function") { 
+          netview.refresh();
+      }
     } // openRightTab
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
@@ -477,7 +482,10 @@ System.print("ok")</div>
             document.removeEventListener('mousemove', mouseMoveHandler);
             document.removeEventListener('mouseup', mouseUpHandler);
             // update network view 
-           // netview.refresh();
+            netview.refresh();
+            if (typeof netview.refresh === "function") { 
+              netview.refresh();
+            }
         };
         // Attach the handler
         // SERGI: disable 
@@ -494,9 +502,12 @@ System.print("ok")</div>
         var gd = document.getElementById('try-plot')
         if ('data' in gd)
         {
+          if (gd.data.length  > 0)
+          {
             // console.log(gd.data[0].x)
             res += "var xc=["+ gd.data[0].x.toString()+ "]\nvar yc=[" + gd.data[0].y.toString()+"]\n";
             res += "Plot.plot({\"x\":xc, \"y\":yc})\n";
+          }
         }
         var filename = "data.txt";
         var content = res;

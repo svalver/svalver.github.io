@@ -86,6 +86,26 @@
                // console.log("set_genome: ", initial_code);   
                 Module['ccall']('set_genome', 'void', ['string'], [initial_code]);
             }
+            if (typeof(Storage) !== "undefined") 
+            {
+               // console.log("setting local storage"); 
+                // check local storage
+                let old_genome = localStorage.getItem('genome');
+                if (old_genome != null)  {
+                  console.log("local genome:", old_genome); 
+                  Module['ccall']('set_genome', 'void', ['string'], [old_genome]);
+                }
+                // get username
+                let old_username = localStorage.getItem('bc_username');
+                if (old_username != null)  {
+                  console.log("local username:", old_username); 
+                  Module['ccall']('set_username', 'void', ['string'], [old_username]);
+                }
+            }
+            else
+            {
+                console.log("Sorry! No Web Storage support .. ");
+            }
           }
         ],
         print: (function() {
