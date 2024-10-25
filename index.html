@@ -2,6 +2,34 @@
 layout: default
 title: Evolution of Networks Lab
 ---
+<!-- Link to PDF.js library -->
+<script src="papers/pdf.mjs" type="module"></script>
+<script>
+    // Configure the workerSrc property
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "papers/pdf.worker.mjs";
+
+    function loadPDF(pdfUrl, canvasId) {
+        var loadingTask = pdfjsLib.getDocument(pdfUrl);
+        loadingTask.promise.then(function(pdf) {
+            pdf.getPage(1).then(function(page) {
+                var scale = 1.5;
+                var viewport = page.getViewport({ scale: scale });
+
+                var canvas = document.getElementById(canvasId);
+                var context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                var renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                page.render(renderContext);
+            });
+        });
+    }
+</script>
+
 <style>
 /* General Styles */
 body {
@@ -79,24 +107,13 @@ p {
     }
 }
 
-/* Grid for Recent Articles */
-.articles-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* Only one PDF per row */
-    gap: 20px;
-    margin-top: 2em;
-}
-.article-container {
-    background-color: #f9f9f9;
-    padding: 40px;
-    border-radius: 8px;
+.pdf-container {
     text-align: center;
+    margin-bottom: 2em;
 }
-.article-container iframe {
-    width: 100%;
-    height: 400px; /* Increased height for better viewing */
-    border: none;
-    margin-bottom: 10px;
+.canvas {
+    border: 1px solid #ddd;
+    margin-top: 10px;
 }
 
 /* Styling for Research Illustration */
@@ -105,6 +122,21 @@ p {
     margin: 2em auto;
     max-width: 100%;
 }
+.map-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+}
+.map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
 </style>
 
 <div class="main">
@@ -140,6 +172,20 @@ p {
         </div>
         <!-- Additional members... -->
 
+         <!-- Member 3 -->
+         <div class="member-container">
+            <img src="images/salva_duran.png" alt="Photo of Salva Duran-Nebreda" class="member-photo">
+            <div class="member-info">
+                <h3>Salva Duran-Nebreda (Postdoctoral Researcher)</h3>
+                <p>
+                    Dr. Salva Duran-Nebreda, a biotechnologist and complex systems researcher, studies major transitions in evolution, with a particular interest in emergent properties in ecosystems and societies. His research spans synthetic biology, EvoDevo, and ecology, focusing on the shifting nature of individuality in evolutionary systems.
+                </p>
+                <div class="social-links">
+                    <a href="https://twitter.com/SDuranNebreda">Twitter</a>
+                </div>
+            </div>
+        </div>
+        
          <!-- Member 2 -->
         <div class="member-container">
             <img src="images/pere_web.jpg" alt="Photo of Pere Renom" class="member-photo">
@@ -156,19 +202,7 @@ p {
             </div>
         </div>
 
-        <!-- Member 3 -->
-        <div class="member-container">
-            <img src="images/salva_duran.png" alt="Photo of Salva Duran-Nebreda" class="member-photo">
-            <div class="member-info">
-                <h3>Salva Duran-Nebreda (Postdoctoral Researcher)</h3>
-                <p>
-                    Dr. Salva Duran-Nebreda, a biotechnologist and complex systems researcher, studies major transitions in evolution, with a particular interest in emergent properties in ecosystems and societies. His research spans synthetic biology, EvoDevo, and ecology, focusing on the shifting nature of individuality in evolutionary systems.
-                </p>
-                <div class="social-links">
-                    <a href="https://twitter.com/SDuranNebreda">Twitter</a>
-                </div>
-            </div>
-        </div>
+       
 
     </div>
 
@@ -192,32 +226,11 @@ p {
         </div>
         <!-- More external members... -->
     </div>
+    
+<h2>Where we are</h2>
 
-   
-
-    <!-- Latest Articles with PDF embedding -->
-    <h2>Latest Articles</h2>
-
-    <div class="articles-grid">
-          <div class="article-container">
-              <iframe src="papers/2024_multiscale_pe.pdf"></iframe>
-              <p><strong>The many ways toward punctuated evolution</strong></p>
-          </div>
-          <div class="article-container">
-              <iframe src="papers/2024_many_pe.pdf"></iframe>
-              <p><strong>On the multiscale dynamics of punctuated
-                evolution</strong></p>
-          </div>
-          <div class="article-container">
-              <iframe src="papers/2024_networks.pdf"></iframe>
-              <p><strong>Networks: The Visual Language of Complexity</strong></p>
-          </div>
-      </div>
-
-       <!-- Research Illustrations -->
-        <h2>Research Illustrations</h2>
-        <div class="illustration-container">
-            <img src="images/welcome.png" alt="Research Illustrations">
-        </div>
+<div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2726.07945486673!2d2.193647549297693!3d41.38520351289911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a308d2848973%3A0xb2c2ef778a4a876f!2sInstitut%20de%20Ciencies%20del%20Mar%2C%20Pg.%20Mar%C3%ADtim%20de%20la%20Barceloneta%2C%2037-49%2C%20Ciutat%20Vella%2C%2008003%20Barcelona!5e0!3m2!1sen!2ses!4v1729888886489!5m2!1sen!2ses" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
 
 </div>
