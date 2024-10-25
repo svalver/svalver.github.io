@@ -2,34 +2,6 @@
 layout: default
 title: Evolution of Networks Lab
 ---
-<!-- Link to PDF.js library -->
-<script src="papers/pdf.mjs" type="module"></script>
-<script>
-    // Configure the workerSrc property
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "papers/pdf.worker.mjs";
-
-    function loadPDF(pdfUrl, canvasId) {
-        var loadingTask = pdfjsLib.getDocument(pdfUrl);
-        loadingTask.promise.then(function(pdf) {
-            pdf.getPage(1).then(function(page) {
-                var scale = 1.5;
-                var viewport = page.getViewport({ scale: scale });
-
-                var canvas = document.getElementById(canvasId);
-                var context = canvas.getContext('2d');
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-
-                var renderContext = {
-                    canvasContext: context,
-                    viewport: viewport
-                };
-                page.render(renderContext);
-            });
-        });
-    }
-</script>
-
 <style>
 /* General Styles */
 body {
@@ -50,11 +22,11 @@ h2 {
     text-align: center;
 }
 p {
-    text-align: justify;
+    text-align: left;
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     body {
-        font-size: 1.1em; /* Larger font size for mobile */
+        font-size: 1.2em; /* Larger font size for mobile */
     }
 }
 
@@ -141,8 +113,11 @@ p {
 
 <div class="main">
 
+
     <!-- Lab Header and Overview -->
     <h1>Welcome to the Evolution of Networks Lab</h1>
+
+    
     <p>
         The Evolution of Networks Lab belongs to the Institute for Evolutionary Biology (IBE). Dr. Sergi Valverde, a CSIC scientist, leads the group with a focus on discovering universal evolutionary principles in both natural and artificial networks. Our lab specializes in complex systems, complex networks, ecology, and cultural evolution.
     </p>
