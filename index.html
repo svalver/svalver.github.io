@@ -11,6 +11,11 @@ body {
     max-width: 1100px;
     padding: 20px;
 }
+h1 {
+    color: #0056b3;
+    margin-top: 2em;
+    text-align: center;
+}
 h2 {
     color: #0056b3;
     margin-top: 2em;
@@ -18,6 +23,11 @@ h2 {
 }
 p {
     text-align: justify;
+}
+@media (max-width: 768px) {
+    body {
+        font-size: 1.1em; /* Larger font size for mobile */
+    }
 }
 
 /* Main Grid for Members */
@@ -62,10 +72,17 @@ p {
     text-decoration: underline;
 }
 
+/* Adjust grid layout for mobile devices */
+@media (max-width: 768px) {
+    .members-grid {
+        grid-template-columns: 1fr; /* Make the grid 1 column on mobile */
+    }
+}
+
 /* Grid for Recent Articles */
 .articles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
+    grid-template-columns: 1fr; /* Only one PDF per row */
     gap: 20px;
     margin-top: 2em;
 }
@@ -77,7 +94,7 @@ p {
 }
 .article-container iframe {
     width: 100%;
-    height: 300px;
+    height: 600px; /* Increased height for better viewing */
     border: none;
     margin-bottom: 10px;
 }
@@ -88,37 +105,31 @@ p {
     margin: 2em auto;
     max-width: 100%;
 }
-@media (max-width: 768px) {
-    .members-grid, .articles-grid {
-        grid-template-columns: 1fr;
-    }
-}
 </style>
 
 <div class="main">
 
     <!-- Lab Header and Overview -->
     <h1>Welcome to the Evolution of Networks Lab</h1>
-
     <p>
         The Evolution of Networks Lab belongs to the Institute for Evolutionary Biology (IBE). Dr. Sergi Valverde, a CSIC scientist, leads the group with a focus on discovering universal evolutionary principles in both natural and artificial networks. Our lab specializes in complex systems, complex networks, ecology, and cultural evolution.
     </p>
 
     <p>
-        We investigate how innovations emerge and evolve, applying a complex network perspective to understand the cultural and technological evolution. Our work involves empirical studies and computational models, including analyzing millions of patents to study technological evolution. We aim to extend evolutionary theory beyond biology into technology and culture.
+        We investigate how innovations emerge and evolve, applying a complex network perspective to understand the evolution of culture and technology. Our work involves empirical studies and computational models, including analyzing millions of patents to study technological evolution. We aim to extend evolutionary theory beyond biology into technology and culture.
     </p>
 
     <h2>Lab Members</h2>
 
-    <!-- Members Grid (same as previous) -->
+    <!-- Members Grid -->
     <div class="members-grid">
-        <!-- Repeat this block for each member -->
+        <!-- Member 1 -->
         <div class="member-container">
             <img src="images/sergi_web.jpg" alt="Photo of Sergi Valverde" class="member-photo">
             <div class="member-info">
                 <h3>Sergi Valverde (Principal Investigator)</h3>
                 <p>
-                    Dr. Sergi Valverde is a complex systems scientist at IBE, exploring the origins of innovations in technology and nature. With a background in computer science and physics, Dr. Valverde applies evolutionary theory to non-biological domains, including social evolution. His research focuses on the evolution of complexity in both natural and artificial systems, demonstrated through the coevolution of hardware and software.
+                    Dr. Sergi Valverde is a complex systems scientist at IBE, exploring the origins of innovations in technology and nature. With a background in computer science and physics, Dr. Valverde applies evolutionary theory to non-biological domains, including social evolution.
                 </p>
                 <div class="social-links">
                     <a href="https://twitter.com/svalver">Twitter</a>
@@ -126,9 +137,9 @@ p {
                 </div>
             </div>
         </div>
-        <!-- Additional members here -->
+        <!-- Additional members... -->
 
-        <!-- Member 2 -->
+         <!-- Member 2 -->
         <div class="member-container">
             <img src="images/pere_web.jpg" alt="Photo of Pere Renom" class="member-photo">
             <div class="member-info">
@@ -136,9 +147,8 @@ p {
                 <p>
                     Dr. Pere Renom is a postdoctoral researcher with a focus on macroevolution and science communication. He holds a PhD in Biomedicine and has published widely in both academic and public domains. Renom combines his experience in biology, philosophy, and paleogenomics with a career in science reporting.
                     
-                    "Is the tape of life replayable or not?" This question drives his research pursuits.
+                    "Is the tape of life replayable or not?" That is the question he would like to solve.
                 </p>
-                <p>"Is the tape of life replayable or not?" This question drives his research pursuits.</p>
                 <div class="social-links">
                     <a href="https://www.pererenom.com/?lang=en">Website</a>
                 </div>
@@ -154,12 +164,10 @@ p {
                     Dr. Salva Duran-Nebreda, a biotechnologist and complex systems researcher, studies major transitions in evolution, with a particular interest in emergent properties in ecosystems and societies. His research spans synthetic biology, EvoDevo, and ecology, focusing on the shifting nature of individuality in evolutionary systems.
                 </p>
                 <div class="social-links">
-                    <a href="https://www.salvadurannebreda.com">Website</a>
                     <a href="https://twitter.com/SDuranNebreda">Twitter</a>
                 </div>
             </div>
         </div>
-
 
     </div>
 
@@ -172,7 +180,7 @@ p {
             <div class="member-info">
                 <h3>Blai Vidiella (Postdoctoral Researcher)</h3>
                 <p>
-                    Dr. Blai Vidiella collaborates on the MPA4sustainability project, designing systems to prevent ecological collapse. His interdisciplinary approach draws from ecology, synthetic biology, computer science, and mathematical modeling to understand and mitigate human impact on endangered ecosystems. His work explores the potential of terraforming as a means to sustain Earth.
+                    Dr. Blai Vidiella works on the MPA4sustainability Biodiversa project, focusing on preventing ecological collapse by designing and simulating engineered systems. His work combines ecology, synthetic biology, and mathematical modeling.
                 </p>
                 <div class="social-links">
                     <a href="https://twitter.com/BlaiVidiella">Twitter</a>
@@ -180,13 +188,15 @@ p {
                 </div>
             </div>
         </div>
-        <!-- Add more external members here -->
+        <!-- More external members... -->
     </div>
 
-    <!-- Latest Articles with PDF embedding -->
-      <h2>Latest Articles</h2>
+   
 
-      <div class="articles-grid">
+    <!-- Latest Articles with PDF embedding -->
+    <h2>Latest Articles</h2>
+
+    <div class="articles-grid">
           <div class="article-container">
               <iframe src="papers/2024_multiscale_pe.pdf"></iframe>
               <p><strong>The many ways toward punctuated evolution</strong></p>
@@ -202,13 +212,10 @@ p {
           </div>
       </div>
 
-
-    <!-- Research Illustrations -->
-    <h2>Some Research Illustrations</h2>
-    <div class="illustration-container">
-        <img src="images/welcome.png" alt="Research Illustrations">
-    </div>
-
-  
+       <!-- Research Illustrations -->
+        <h2>Research Illustrations</h2>
+        <div class="illustration-container">
+            <img src="images/welcome.png" alt="Research Illustrations">
+        </div>
 
 </div>
