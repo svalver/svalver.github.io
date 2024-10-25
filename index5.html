@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paginated PDFs Example</title>
+</head>
+<body>
+
+<h1>PDF Viewer with Pagination</h1>
+
+<!-- PDF 1 Container -->
+<div id="pdf1-container">
+    <h2>PDF 1: 'The many ways toward punctuated evolution'</h2>
+    <canvas id="canvas1" style="border: 1px solid black; direction: ltr;"></canvas>
+    <div>
+        <button onclick="previousPage('pdf1')">Previous</button>
+        <button onclick="nextPage('pdf1')">Next</button>
+        <span id="pdf1-page-info">Page 1</span>
+    </div>
+</div>
+
+<!-- PDF 2 Container -->
+<div id="pdf2-container">
+    <h2>PDF 2: 'On the multiscale dynamics of punctuated evolution'</h2>
+    <canvas id="canvas2" style="border: 1px solid black; direction: ltr;"></canvas>
+    <div>
+        <button onclick="previousPage('pdf2')">Previous</button>
+        <button onclick="nextPage('pdf2')">Next</button>
+        <span id="pdf2-page-info">Page 1</span>
+    </div>
+</div>
+
+<script src="pdfjs/build/pdf.mjs" type="module"></script>
+<script type="module">
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs/build/pdf.worker.mjs';
+
+    // Define an object to store PDF data for each document
+    const pdfData = {
+        pdf1: { url: 'papers/2024_many_pe.pdf', currentPage: 1, totalPages: 0, canvasId: 'canvas1', pageInfoId: 'pdf1-page-info' },
+        pdf2: { url: 'papers/2024_multiscale_pe.pdf', currentPage: 1, totalPages: 0, canvasId: 'canvas2', pageInfoId: 'pdf2-page-info' },
+    };
+
+    // Function to load a specific page of a PDF
+    async function loadPDFPage(pdf, pageNum, canvasId) {
+        const page = await pdf.getPage(pageNum);
+        const scale = 1.5;
+        const viewport = page.getViewport({ scale });
+        const outputScale = window.devicePixelRatio || 1;
+
+        const canvas = document.getElementById(canvasId);
+        const context = canvas.getContext('2d');
+        canvas.width = Math.floor(viewport.width * outputScale);
+        canvas.height = Math.floor(viewport.height * outputScale);
+        canvas.style.width = Math.floor(viewport.width) + "px";
+        canvas.style.height = Math.floor(viewport.height) + "px";
+
+        const transform = outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null;
+        const renderContext = {
+            canvasContext: context,
+            transform,
+            viewport,
+        };
+        page.render(renderContext);
+    }
+
+    // Initialize and load each PDF
+    async function initializePDF(pdfKey) {
+        const pdfDoc = await pdfjsLib.getDocument(pdfData[pdfKey].url).promise;
+        pdfData[pdfKey].pdfDoc = pdfDoc;
+        pdfData[pdfKey].totalPages = pdfDoc.numPages;
+        loadPDFPage(pdfDoc, pdfData[pdfKey].currentPage, pdfData[pdfKey].canvasId);
+        updatePageInfo(pdfKey);
+    }
+
+    // Update page info display
+    function updatePageInfo(pdfKey) {
+        document.getElementById(pdfData[pdfKey].pageInfoId).textContent = 
+            `Page ${pdfData[pdfKey].currentPage} of ${pdfData[pdfKey].totalPages}`;
+    }
+
+    // Go to the next page
+    function nextPage(pdfKey) {
+        if (pdfData[pdfKey].currentPage < pdfData[pdfKey].totalPages) {
+            pdfData[pdfKey].currentPage += 1;
+            loadPDFPage(pdfData[pdfKey].pdfDoc, pdfData[pdfKey].currentPage, pdfData[pdfKey].canvasId);
+            updatePageInfo(pdfKey);
+        }
+    }
+
+    // Go to the previous page
+    function previousPage(pdfKey) {
+        if (pdfData[pdfKey].currentPage > 1) {
+            pdfData[pdfKey].currentPage -= 1;
+            loadPDFPage(pdfData[pdfKey].pdfDoc, pdfData[pdfKey].currentPage, pdfData[pdfKey].canvasId);
+            updatePageInfo(pdfKey);
+        }
+    }
+
+    // Initialize both PDFs
+    initializePDF('pdf1');
+    initializePDF('pdf2');
+
+</script>
+
+</body>
+</html>
