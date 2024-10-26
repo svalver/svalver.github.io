@@ -1,0 +1,44 @@
+body { 
+	margin: 20px auto; 
+	width: 100%;
+	line-height: 1.5em;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+ }
+
+a { text-decoration: none; color: #999; }
+a:hover { text-decoration: underline; }
+
+p, ul { font-size: 1.1em; line-height: 1.5em; color: #333; }
+
+h1, h2, h3, h4 {     
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+h1 { font-size: 1.5em;  }
+h2 { font-size: 1.4em; }
+h3 { font-size: 1.3em; }
+h4 { font-size: 1.2em; }
+
+nav ul, footer ul { 
+	font-size: 1em; 
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	padding: 0px; 
+	list-style: none; 
+	font-weight: bold; 
+}
+nav ul li, footer ul li { display: inline; margin-right: 20px; }
+
+footer { border-top: 1px solid #d5d5d5; font-size: .8em; }
+
+/* Blog */
+ul.posts { margin: 20px auto 40px; font-size: 1.1em; }
+ul.posts li { list-style: none; }
+
+/* CV */
+.cv { margin: 0px 0px 60px; }
+.cv h1 { font-size: 3em; }
+.cv h2 { font-size: 2em; }
+.cv address, .cv .download { 
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cv address, .cv p { font-size: 1.1em; }
+.cv .download { float: right; font-size: .8em; text-transform: uppercase; }

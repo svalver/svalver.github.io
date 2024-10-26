@@ -1,44 +1,111 @@
 body { 
-	margin: 60px auto; 
-	width: 70%;
-	line-height: 1.5em;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
- }
+    margin: 20px auto; 
+    width: 100%;
+    line-height: 1.6em;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1em; /* Default base font size */
+}
 
-a { text-decoration: none; color: #999; }
+/* Adjust link styling for better contrast */
+a { text-decoration: none; color: #666; }
 a:hover { text-decoration: underline; }
 
-p, ul { font-size: 1.1em; line-height: 1.5em; color: #333; }
+p, ul { 
+    font-size: 1.2em; /* Slightly larger default text */
+    line-height: 1.6em; 
+    color: #333; 
+}
 
 h1, h2, h3, h4 {     
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #222;
 }
-h1 { font-size: 1.5em;  }
-h2 { font-size: 1.4em; }
-h3 { font-size: 1.3em; }
-h4 { font-size: 1.2em; }
+
+h1 { font-size: 2em; } /* Increase for better readability */
+h2 { font-size: 1.75em; }
+h3 { font-size: 1.5em; }
+h4 { font-size: 1.25em; }
 
 nav ul, footer ul { 
-	font-size: 1em; 
+    font-size: 1.1em; 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	padding: 0px; 
-	list-style: none; 
-	font-weight: bold; 
+    padding: 0px; 
+    list-style: none; 
+    font-weight: bold; 
 }
-nav ul li, footer ul li { display: inline; margin-right: 20px; }
 
-footer { border-top: 1px solid #d5d5d5; font-size: .8em; }
+nav ul li, footer ul li { 
+    display: inline; 
+    margin-right: 20px; 
+}
+
+footer { 
+    border-top: 1px solid #d5d5d5; 
+    font-size: 0.9em; 
+    padding-top: 10px;
+    text-align: center;
+}
 
 /* Blog */
-ul.posts { margin: 20px auto 40px; font-size: 1.1em; }
-ul.posts li { list-style: none; }
+ul.posts { 
+    margin: 20px auto 40px; 
+    font-size: 1.1em; 
+}
+ul.posts li { 
+    list-style: none; 
+}
 
 /* CV */
 .cv { margin: 0px 0px 60px; }
 .cv h1 { font-size: 3em; }
-.cv h2 { font-size: 2em; }
+.cv h2 { font-size: 2.5em; } /* Increased for mobile readability */
 .cv address, .cv .download { 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.cv address, .cv p { font-size: 1.1em; }
-.cv .download { float: right; font-size: .8em; text-transform: uppercase; }
+.cv address, .cv p { 
+    font-size: 1.2em; 
+    line-height: 1.6em;
+}
+.cv .download { 
+    float: right; 
+    font-size: 0.9em; 
+    text-transform: uppercase; 
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    body { 
+        margin: 10px auto; 
+        font-size: 1.1em; /* Base font size increased for smaller screens */
+    }
+    h1 { font-size: 1.8em; }
+    h2 { font-size: 1.6em; }
+    h3 { font-size: 1.4em; }
+    h4 { font-size: 1.2em; }
+    
+    nav ul li, footer ul li { 
+        margin-right: 10px; 
+    }
+
+    .cv h1 { font-size: 2.5em; }
+    .cv h2 { font-size: 2em; }
+}
+
+@media (max-width: 480px) {
+    body { 
+        margin: 5px auto; 
+        font-size: 1.2em; /* Further increase for smaller devices */
+    }
+    h1 { font-size: 1.6em; }
+    h2 { font-size: 1.4em; }
+    h3 { font-size: 1.3em; }
+    h4 { font-size: 1.1em; }
+
+    .cv h1 { font-size: 2em; }
+    .cv h2 { font-size: 1.75em; }
+    .cv .download { 
+        float: none; 
+        text-align: center; 
+        margin-top: 10px; 
+    }
+}
