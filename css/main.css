@@ -81,6 +81,7 @@ img, video, iframe { max-width: 100%; }
 /* Homepage */
 .home-page { font-family: Arial, sans-serif; line-height: 1.6; }
 .home-page h1, .home-page h2 { color: #0056b3; margin-top: 2em; text-align: center; }
+.lab-social-link { margin: 1.5em 0 2.5em; font-weight: 600; }
 .members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 20px; margin-top: 2em; }
 .member-container { display: flex; flex-direction: column; align-items: center; background-color: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; }
 .member-photo { width: 250px; height: 250px; object-fit: cover; border-radius: 50%; margin-bottom: 15px; }
