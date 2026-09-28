@@ -1,20 +1,10 @@
 ---
 layout: default
 title: Teaching
+description: Teaching materials and interactive tools from the Evolution of Networks Lab.
 ---
 
-<style>
-img {
-    -webkit-animation: colorize 2s cubic-bezier(0, 0, .78, .36) 1;
-    animation: colorize 2s cubic-bezier(0, 0, .78, .36) 1;
-    background: transparent;
-    display: block;
-    margin: 1.2em auto;
-    max-width: 100%;
-}
-</style>
-
-<div class="about">
+<div class="content-page">
     <h1>Teaching</h1>
     <p><img src="../images/teaching_header.jpg" alt="Teaching Header Image"/></p>
     
@@ -34,7 +24,7 @@ img {
     </p>
     
     <p>
-        Biocreator allows students to create and test synthetic designs. Students can edit the genomic sequence of synthetic organisms (real gene names are used) and explore complex genotype-phenotype mappings. These synthetic designs can then compete in a virtual ecosystem (contact us if you are interested in a demo). Biocreator enables students to apply their understanding of evolution and ecology in a practical way. You can explore Biocreator <a href="http://svalver.github.io/biocreator/index.html">here</a>.
+        Biocreator allows students to create and test synthetic designs. Students can edit the genomic sequence of synthetic organisms (real gene names are used) and explore complex genotype-phenotype mappings. These synthetic designs can then compete in a virtual ecosystem (contact us if you are interested in a demo). Biocreator enables students to apply their understanding of evolution and ecology in a practical way. You can explore Biocreator <a href="{{ '/biocreator/' | relative_url }}">here</a>.
     </p>
     
     <p>
@@ -54,12 +44,10 @@ img {
     </p>
     
     <h2>Evolutionary Algorithms (Degree of Biomedical Engineering)</h2>
-    <p>
-        <video width="640" height="320" controls autoplay="false">
+    <div class="responsive-embed">
+        <video class="responsive-video" controls>
             <source src="trailer.mp4" type="video/mp4">
-            <object data="" width="640" height="320">
-                <embed width="640" height="320" src="trailer.mp4">
-            </object>
+            Your browser does not support HTML video. <a href="trailer.mp4">Download the video</a>.
         </video>
-    </p>
+    </div>
 </div>

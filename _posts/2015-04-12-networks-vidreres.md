@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Xarxes complexes: l\'arquitectura de la vida (Complex Networks: The Arquitecture of Life)"
+title: "Xarxes complexes: l'arquitectura de la vida (Complex Networks: The Architecture of Life)"
 date: 2015-04-12
 ---
 
@@ -16,4 +16,3 @@ la consciencia i el col.lapse de les civilitzacions. [Read more](http://www.jorn
 
 Es pot veure la conferencia al canal de [Youtube](https://www.youtube.com/watch?v=GWFk4TdbQhY)
 de Activa-21. 
-

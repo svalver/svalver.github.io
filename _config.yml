@@ -1,3 +1,4 @@
 name: Sergi Valverde
+url: "https://svalver.github.io"
 permalink: /blog/:year/:month/:day/:title
 markdown: kramdown

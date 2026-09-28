@@ -1,3 +1,5 @@
+* { box-sizing: border-box; }
+
 body { 
     margin: 20px auto; 
     width: 90%;
@@ -7,7 +9,7 @@ body {
 }
 
 /* Adjust link styling for better contrast */
-a { text-decoration: none; color: #666; }
+a { text-decoration: none; color: #0056b3; }
 a:hover { text-decoration: underline; }
 
 p, ul { 
@@ -45,6 +47,50 @@ footer {
     padding-top: 10px;
     text-align: center;
 }
+
+img, video, iframe { max-width: 100%; }
+
+.content-page img {
+    background: transparent;
+    display: block;
+    margin: 1.2em auto;
+    max-width: 100%;
+}
+
+.responsive-embed {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 16 / 9;
+    margin: 1.2em auto;
+}
+
+.responsive-embed iframe,
+.responsive-embed video {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.responsive-video { display: block; width: 100%; height: auto; margin: 1.2em auto; }
+
+.cv { margin: 20px 0 60px; }
+.cv .download { float: right; font-size: 0.8em; text-transform: uppercase; }
+.cv address { font-size: 1.1em; line-height: 1.6em; }
+
+/* Homepage */
+.home-page { font-family: Arial, sans-serif; line-height: 1.6; }
+.home-page h1, .home-page h2 { color: #0056b3; margin-top: 2em; text-align: center; }
+.members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 2em; }
+.member-container { display: flex; flex-direction: column; align-items: center; background-color: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; }
+.member-photo { width: 250px; height: 250px; object-fit: cover; border-radius: 50%; margin-bottom: 15px; }
+.rendering-image { width: 75%; display: block; margin: auto; }
+.member-info h3 { margin-top: 0; font-size: 1.5em; }
+.member-info p { margin: 10px 0; }
+.social-links { margin-top: auto; }
+.social-links a { margin-right: 10px; }
+.map-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+.map-container iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 /* Blog */
 ul.posts { 

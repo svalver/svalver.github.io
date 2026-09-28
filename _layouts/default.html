@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
-		<title>>{{ page.title }}</title>
-		<!-- link to main stylesheet -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{{ page.title }} | {{ site.name }}</title>
+		<meta name="description" content="{{ page.description | default: 'Research on complex systems, networks, ecology, and cultural evolution by Sergi Valverde and the Evolution of Networks Lab.' }}">
+		<link rel="canonical" href="{{ page.url | absolute_url }}">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="{{ page.title }} | {{ site.name }}">
+		<meta property="og:description" content="{{ page.description | default: 'Research on complex systems, networks, ecology, and cultural evolution by Sergi Valverde and the Evolution of Networks Lab.' }}">
+		<meta property="og:url" content="{{ page.url | absolute_url }}">
+		<meta property="og:site_name" content="{{ site.name }}">
+		<link rel="icon" href="{{ '/images/favicon.svg' | relative_url }}" type="image/svg+xml">
 		<link rel="stylesheet" type="text/css" href="/css/main.css">
 	</head>
 	<body>
@@ -11,15 +20,14 @@
         		<li><a href="/">Home</a></li>
 	        	<li><a href="/about">About</a></li>
         		<li><a href="/cv">CV</a></li>
-        		<li><a href="/blog">News</a></li>
         		<li><a href="/proj">Projects</a></li>
         		<li><a href="/teach">Teaching</a></li>
     		</ul>
 		</nav>
 		
-		{{ content }}
-			
-		</div><!-- /.container -->
+		<main class="container">
+			{{ content }}
+		</main>
 		<footer>
 	    		<ul>
 	        		<li><a href="mailto:svalver@gmail.com">email</a></li>

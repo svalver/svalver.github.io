@@ -1,122 +1,9 @@
 ---
 layout: default
 title: Evolution of Networks Lab
+description: "Evolution of Networks Lab: research on complex systems, network science, ecology, and cultural evolution."
 ---
-<style>
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0 auto;
-    max-width: 1100px;
-    padding: 20px;
-}
-h1 {
-    color: #0056b3;
-    margin-top: 2em;
-    text-align: center;
-}
-h2 {
-    color: #0056b3;
-    margin-top: 2em;
-    text-align: center;
-}
-p {
-    text-align: left;
-}
-@media (max-width: 1024px) {
-    body {
-        font-size: 1.2em; /* Larger font size for mobile */
-    }
-}
-
-/* Main Grid for Members */
-.members-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 20px;
-    margin-top: 2em;
-}
-.member-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-}
-.member-photo {
-    width: 250px;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-bottom: 15px;
-}
-.rendering-image{
-    width: 75%;
-    display: block; 
-    margin: auto;
-}
-.member-info h3 {
-    margin-top: 0;
-    font-size: 1.5em;
-}
-.member-info p {
-    margin: 10px 0;
-}
-.social-links {
-    margin-top: auto;
-}
-.social-links a {
-    margin-right: 10px;
-    text-decoration: none;
-    color: #0056b3;
-}
-.social-links a:hover {
-    text-decoration: underline;
-}
-
-/* Adjust grid layout for mobile devices */
-@media (max-width: 1024px) {
-    .members-grid {
-        grid-template-columns: 1fr; /* Make the grid 1 column on mobile */
-    }
-}
-
-.pdf-container {
-    text-align: center;
-    margin-bottom: 2em;
-}
-.canvas {
-    border: 1px solid #ddd;
-    margin-top: 10px;
-}
-
-/* Styling for Research Illustration */
-.illustration-container img {
-    display: block;
-    margin: 2em auto;
-    max-width: 100%;
-}
-.map-container {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-    height: 0;
-    overflow: hidden;
-}
-.map-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-</style>
-
-<div class="main">
+<div class="home-page">
 
 
     <!-- Lab Header and Overview -->
@@ -151,22 +38,17 @@ p {
                 </div>
             </div>
         </div>
-        <!-- Additional members... -->
 
-         <!-- Member 3 -->
-         <div class="member-container">
-            <img src="images/salva_duran.png" alt="Photo of Salva Duran-Nebreda" class="member-photo">
+        <div class="member-container">
+            <img src="images/guillem_guell_paule.jpg" alt="Photo of Guillem Güell Paule" class="member-photo">
             <div class="member-info">
-                <h3>Salva Duran-Nebreda (Postdoctoral Researcher)</h3>
+                <h3>Guillem Güell Paule</h3>
                 <p>
-                    Dr. Salva Duran-Nebreda, a biotechnologist and complex systems researcher, studies major transitions in evolution, with a particular interest in emergent properties in ecosystems and societies. His research spans synthetic biology, EvoDevo, and ecology, focusing on the shifting nature of individuality in evolutionary systems.
+                    Guillem Güell Paule develops computational methods for the analysis and comparison of biological shape. His work combines image processing, computer vision, and morphometric techniques to extract quantitative representations of morphology from biological images.
                 </p>
-                <div class="social-links">
-                    <a href="https://twitter.com/SDuranNebreda">Twitter</a>
-                </div>
             </div>
         </div>
-        
+
          <!-- Member 2 -->
         <div class="member-container">
             <img src="images/pere_web.jpg" alt="Photo of Pere Renom" class="member-photo">
@@ -192,14 +74,26 @@ p {
 
     <div class="members-grid">
         <div class="member-container">
+            <img src="images/salva_duran.png" alt="Photo of Salva Duran-Nebreda" class="member-photo">
+            <div class="member-info">
+                <h3>Salva Duran-Nebreda (Postdoctoral Researcher)</h3>
+                <p>
+                    Dr. Salva Duran-Nebreda, a biotechnologist and complex systems researcher, studies major transitions in evolution, with a particular interest in emergent properties in ecosystems and societies. His research spans synthetic biology, EvoDevo, and ecology, focusing on the shifting nature of individuality in evolutionary systems.
+                </p>
+                <div class="social-links">
+                    <a href="https://twitter.com/SDuranNebreda">Twitter</a>
+                </div>
+            </div>
+        </div>
+        <div class="member-container">
             <img src="images/blai_vidiella.png" alt="Photo of Blai Vidiella" class="member-photo">
             <div class="member-info">
                 <h3>Blai Vidiella (Postdoctoral Researcher)</h3>
                 <p>
-                    Dr. Blai Vidiella works on the MPA4sustainability Biodiversa project, focusing on preventing ecological collapse by designing and simulating engineered systems. His work combines ecology, synthetic biology, and mathematical modeling.
+                    Dr. Blai Vidiella is a postdoctoral researcher at the Station d’Écologie Théorique et Expérimentale (CNRS), where he collaborates with José M. Montoya on the BIOcean5D project. His current work investigates the relationship between biodiversity and ecosystem function in marine ecosystems. Previously, he was a postdoctoral researcher at the Evolution of Networks Lab, contributing to the MPA4Sustainability Biodiversa project on marine protected areas, ecological networks, and their links with human societies.
                 </p>
                 <div class="social-links">
-                    <a href="http://www.vidiella.science">Website</a>
+                    <a href="https://www.vidiella.science">Website</a>
                     <a href="https://twitter.com/BlaiVidiella">Twitter</a>
                     <a href="https://ecoevo.social/@bvidiella">Mastodon</a>
                 </div>
@@ -213,9 +107,8 @@ p {
         <h2>Networks - The Visual Language of Complexity</h2>
         <img src="images/networks_banner.jpeg" alt="Banner image of complex networks" style="width: 100%; border-radius: 8px; margin-top: 1em;">
         <p style="margin-top: 1em;">
-            We are excited to announce our latest work, "<strong>Networks: The Visual Language of Complexity</strong>," a comprehensive review and reflection on our last 20 years of research in complex networks.
-            In this chapter, we offer our personal perspective on the field, drawing from our extensive experience and contributions. This work captures the essence of our lab's mission and the ongoing journey of network science in understanding complex systems.
-            <a href="papers/2024_networks.pdf" style="font-weight: bold; color: #1a73e8;">Read the full chapter (PDF)</a>.
+            This chapter reflects on two decades of research in complex networks and offers our perspective on how network science has developed as a visual and conceptual language for understanding complexity. Drawing on work across biological, ecological, technological, and cultural systems, it highlights the ideas and questions that continue to shape our research.
+            <a href="papers/2024_networks.pdf" style="font-weight: bold; color: #1a73e8;">Read the chapter (PDF)</a>.
         </p>
     </div>
 
