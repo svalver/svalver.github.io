@@ -1,0 +1,26 @@
+/* Layout of main_exp1.cpp: Reset and the instruction line on top, then the
+   city view (68% of the width) and the Context / Experiment / Overview panel.
+   ItemSpacing is the ImGui default (8, 4) in this applet. */
+
+.nl-content { gap: calc(4 * var(--u)); }
+.toolbar { gap: var(--pad); }
+.columns { flex: 1; min-height: 0; display: flex; gap: var(--pad); }
+.left { flex: 0 0 68%; min-width: 0; display: flex; flex-direction: column; }
+.right { flex: 1; display: flex; flex-direction: column; gap: calc(4 * var(--u)); }
+
+.view { flex: 1; min-height: 0; position: relative; }
+#canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+canvas.nl-view.attack.over-node { cursor: pointer; }
+
+.section { display: flex; flex-direction: column; gap: calc(4 * var(--u)); padding-top: calc(4 * var(--u)); }
+#gcc-plot { height: calc(60 * var(--u)); }
+#gcc.low { color: rgb(255, 0, 0); }
+
+@media (max-width: 700px) {
+  body { overflow: auto; }
+  .nl-window { position: static; margin: var(--pad); }
+  .columns { flex-direction: column; }
+  .left { flex: none; }
+  .view { flex: none; height: 70vh; }
+  .right { overflow: visible; }
+}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Network Experiment</title>
+    <link rel="stylesheet" href="../shared/netlab.css?v=ee62343c" />
+    <link rel="stylesheet" href="activity.css?v=ee62343c" />
+    <script type="module" src="activity.js?v=ee62343c"></script>
+  </head>
+  <body>
+    <main class="nl-window">
+      <div class="nl-titlebar">
+        <h1 class="nl-title">Small World - by @svalver 2016-2026</h1>
+        <button class="nl-title-button" id="scale-down" type="button" aria-label="Smaller" title="Smaller">−</button>
+        <button class="nl-title-button" id="scale-up" type="button" aria-label="Larger" title="Larger">+</button>
+      </div>
+      <div class="nl-content">
+        <div class="columns">
+          <div class="left">
+            <div class="nl-row toolbar">
+              <button class="nl-button" id="reset" type="button">Reset</button>
+              <div class="nl-frame nl-slider"><input id="speed" type="range" min="0" max="100" step="1" value="0" /><output for="speed" id="speed-value">0</output></div>
+              <label for="speed">Speed</label>
+              <button class="nl-button" id="failures" type="button" title="Remove 10 random links">Failures</button>
+              <button class="nl-button" id="random-shortcut" type="button" title="Add a shortcut between two random nodes">Random Shortcut</button>
+            </div>
+            <div class="nl-row" id="instruction" aria-live="polite">Left-click to select the source endpoint.</div>
+            <div class="view"><canvas class="nl-view attack" id="canvas" role="img" aria-label="Network view"></canvas></div>
+          </div>
+
+          <div class="nl-child right">
+            <details class="nl-header" open>
+              <summary>Context</summary>
+              <div class="section">
+                <div class="nl-row">Nodes:&nbsp;<span class="nl-value" id="nodes">0</span></div>
+                <div class="nl-row">Links:&nbsp;<span class="nl-value" id="links">0</span></div>
+                <div class="nl-row">Undirected Graph</div>
+              </div>
+            </details>
+
+            <details class="nl-header" open>
+              <summary>Layout</summary>
+              <div class="section">
+                <div class="nl-row"><input class="nl-frame" id="distance" data-param="distance" inputmode="decimal" /><label for="distance">Distance</label></div>
+                <div class="nl-row"><input class="nl-frame" id="theta" data-param="theta" inputmode="decimal" /><label for="theta">Theta</label></div>
+                <div class="nl-row"><input class="nl-frame" id="charge" data-param="charge" inputmode="decimal" /><label for="charge">Charge</label></div>
+                <div class="nl-row"><input class="nl-frame" id="strength" data-param="strength" inputmode="decimal" /><label for="strength">Strength</label></div>
+                <div class="nl-row"><input class="nl-frame" id="gravity" data-param="gravity" inputmode="decimal" /><label for="gravity">Gravity</label></div>
+                <div class="nl-row"><input class="nl-frame" id="friction" data-param="friction" inputmode="decimal" /><label for="friction">Friction</label></div>
+              </div>
+            </details>
+
+            <details class="nl-header" open>
+              <summary>Experiment</summary>
+              <div class="section">
+                <div class="nl-row">Shortcuts:&nbsp;<span class="nl-value" id="shortcuts">0</span></div>
+                <div class="nl-row">Average Path Length:&nbsp;<span class="nl-value" id="apl">0</span></div>
+                <div class="nl-row">
+                  <div class="nl-frame nl-plot" id="apl-plot"></div>
+                  <span class="nl-label">&lt;D&gt;</span>
+                </div>
+                <div class="nl-row buttons">
+                  <button class="nl-button nl-small" id="copy" type="button" title="Copy shortcuts and average path length as a table">Copy</button>
+                  <button class="nl-button nl-small" id="send" type="button" title="Send this solution to the class board" hidden>Send</button>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="nl-modal" id="send-dialog" hidden>
+      <form class="nl-window nl-dialog" id="send-form" aria-labelledby="send-title">
+        <div class="nl-titlebar"><h2 class="nl-title" id="send-title">Send</h2></div>
+        <div class="nl-content">
+          <div class="nl-row"><input class="nl-frame" id="nick" maxlength="8" autocomplete="off" autocapitalize="off" spellcheck="false" pattern="[A-Za-z0-9]{1,8}" required /><label for="nick">Nickname</label></div>
+          <div class="nl-row">Shortcuts:&nbsp;<span class="nl-value" id="send-shortcuts">0</span>&nbsp;&nbsp;Average Path Length:&nbsp;<span class="nl-value" id="send-apl">0</span></div>
+          <div class="nl-row buttons">
+            <button class="nl-button" type="submit" id="send-ok">Send</button>
+            <button class="nl-button" type="button" id="send-cancel">Cancel</button>
+          </div>
+          <div class="nl-row" id="send-status" aria-live="polite"></div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

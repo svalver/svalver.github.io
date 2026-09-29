@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Network Experiment</title>
+    <link rel="stylesheet" href="../shared/netlab.css?v=ee62343c" />
+    <link rel="stylesheet" href="activity.css?v=ee62343c" />
+    <script type="module" src="activity.js?v=ee62343c"></script>
+  </head>
+  <body>
+    <main class="nl-window">
+      <div class="nl-titlebar">
+        <h1 class="nl-title">Network Editor by @svalver 2018-2026</h1>
+        <button class="nl-title-button" id="scale-down" type="button" aria-label="Smaller" title="Smaller">−</button>
+        <button class="nl-title-button" id="scale-up" type="button" aria-label="Larger" title="Larger">+</button>
+      </div>
+      <div class="nl-content">
+        <div class="top" id="top">
+          <div class="nl-child view" id="view">
+            <canvas class="nl-view" id="canvas" role="img" aria-label="Network view: empty"></canvas>
+          </div>
+          <div class="nl-splitter-v" id="vsplitter" role="separator" aria-orientation="vertical" aria-label="Resize network view" tabindex="0"></div>
+          <div class="nl-child code">
+            <button class="nl-button" id="reload" type="button" aria-keyshortcuts="Control+Enter Meta+Enter">Reload</button>
+            <textarea id="source" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Edge list"></textarea>
+            <div class="nl-row error" id="error" role="alert"></div>
+          </div>
+        </div>
+        <div class="nl-splitter-h" id="hsplitter" role="separator" aria-orientation="horizontal" aria-label="Resize panels" tabindex="0"></div>
+        <div class="nl-child panels" id="panels">
+          <section class="nl-child info" aria-label="Info">
+            <div class="nl-row">Nodes:&nbsp;<span class="nl-value" id="nodes">0</span></div>
+            <div class="nl-row">Links:&nbsp;<span class="nl-value" id="links">0</span></div>
+            <div class="nl-row">Undirected Graph</div>
+          </section>
+          <section class="nl-child layout" aria-label="Layout">
+            <div class="nl-row">
+              <div class="nl-frame nl-slider"><input id="speed" type="range" min="0" max="100" step="1" value="0" /><output for="speed" id="speed-value">0</output></div>
+              <label for="speed">Speed</label>
+            </div>
+            <div class="nl-row"><input class="nl-frame" id="distance" data-param="distance" inputmode="decimal" /><label for="distance">Distance</label></div>
+            <div class="nl-row"><input class="nl-frame" id="theta" data-param="theta" inputmode="decimal" /><label for="theta">Theta</label></div>
+            <div class="nl-row"><input class="nl-frame" id="charge" data-param="charge" inputmode="decimal" /><label for="charge">Charge</label></div>
+            <div class="nl-row"><input class="nl-frame" id="strength" data-param="strength" inputmode="decimal" /><label for="strength">Strength</label></div>
+            <div class="nl-row"><input class="nl-frame" id="gravity" data-param="gravity" inputmode="decimal" /><label for="gravity">Gravity</label></div>
+            <div class="nl-row"><input class="nl-frame" id="friction" data-param="friction" inputmode="decimal" /><label for="friction">Friction</label></div>
+          </section>
+          <section class="nl-child pk" aria-label="Degree distribution">
+            <div class="nl-row">
+              <div class="nl-frame nl-plot" id="plot" role="img" aria-label="P(k): empty"></div>
+              <span class="nl-label">P(k)</span>
+            </div>
+            <div class="nl-row">max(Degree):&nbsp;<span class="nl-value" id="max-degree">0</span></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

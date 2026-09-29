@@ -1,0 +1,71 @@
+/* Layout of main_vaccine.cpp: one window (800 x 800 in 2017) with the city
+   view, one or two status lines, and modal windows for the start screen and
+   the game over. */
+
+.nl-content { gap: calc(4 * var(--u)); }
+.status { flex: none; min-height: calc(58 * var(--u)); }
+.line1 { gap: var(--pad); }
+
+/* Vaccines left, like the hearts of a fighting game */
+.vaccine-icons { display: inline-flex; gap: calc(6 * var(--u)); }
+.vaccine-icons svg { width: calc(48 * var(--u)); height: calc(24 * var(--u)); shape-rendering: crispEdges; transition: opacity .2s, transform .2s; }
+.vaccine-icons svg.used { opacity: .35; }
+.vaccine-icons svg.used .fill { fill: none; }
+.vaccine-icons svg.popping { transform: scale(1.35); }
+
+/* The score markers, twice the size, coloured like the curves */
+.counts { flex-wrap: wrap; gap: calc(4 * var(--u)) calc(24 * var(--u)); font-size: calc(32 * var(--u)); line-height: calc(30 * var(--u)); min-height: calc(32 * var(--u)); }
+.counts .healthy { color: rgb(150, 150, 215); }
+.counts .infected { color: rgb(255, 60, 50); }
+.counts .vaccinated { color: rgb(90, 120, 255); }
+
+.counts[hidden], .curves[hidden] { display: none; }
+
+/* Inset plot of H(t), I(t), V(t) over the top-left of the view */
+.curves {
+  position: absolute; left: var(--pad); top: var(--pad); z-index: 1;
+  width: calc(260 * var(--u)); height: calc(130 * var(--u));
+  background: rgba(0, 0, 0, .70); border: 1px solid rgba(179, 179, 179, .65);
+  pointer-events: none;
+}
+.view { flex: 1; min-height: 0; position: relative; }
+#canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+canvas.nl-view.attack.over-node { cursor: pointer; }
+
+/* The legacy modal windows let the network show through (alpha 0.85). */
+.nl-modal.clear { background: transparent; pointer-events: none; }
+.nl-modal.clear > * { pointer-events: auto; }
+.nl-window.nl-dialog.select { width: min(100% - 2 * var(--pad), calc(760 * var(--u))); background: rgba(0, 0, 0, .85); }
+
+/* City tiles: a wireframe of each city above its name */
+.pick { align-items: center; font-size: calc(32 * var(--u)); line-height: calc(30 * var(--u)); gap: calc(12 * var(--u)); }
+.nl-button.city { height: auto; display: flex; flex-direction: column; align-items: center; gap: calc(6 * var(--u)); padding: calc(8 * var(--u)) calc(12 * var(--u)); }
+.city-icon { width: calc(108 * var(--u)); height: calc(72 * var(--u)); display: block; }
+
+/* High Scores at twice the size, to be read from the back of the room */
+.scores-title { font-size: calc(32 * var(--u)); line-height: calc(30 * var(--u)); min-height: calc(34 * var(--u)); }
+.nl-window.nl-dialog.gameover { width: min(100% - 2 * var(--pad), calc(300 * var(--u))); background: rgba(0, 0, 0, .80); }
+.buttons { gap: var(--pad); flex-wrap: wrap; }
+
+/* ImGui::Columns(3): the high score table */
+.scores { width: 100%; border-collapse: collapse; }
+.scores th, .scores td { width: 33%; padding: calc(1 * var(--u)) calc(6 * var(--u)); text-align: left; font-weight: normal; white-space: nowrap;
+  font-size: calc(32 * var(--u)); line-height: calc(30 * var(--u)); }
+.scores th { border-top: 1px solid rgb(128, 128, 128); border-bottom: 1px solid rgb(128, 128, 128); }
+.scores th + th, .scores td + td { border-left: 1px solid rgb(128, 128, 128); }
+
+#name { flex: 0 0 calc(90 * var(--u)); text-transform: uppercase; }
+#send-status:empty { display: none; }
+#send-status.error { color: var(--error); }
+.ok { min-width: calc(60 * var(--u)); }
+
+@media (max-width: 700px) {
+  /* The large table and tiles are for projection; phones use the normal size. */
+  .pick, .scores-title, .scores th, .scores td { font-size: calc(16 * var(--u)); line-height: calc(15 * var(--u)); }
+  .scores-title { min-height: var(--frame-h); }
+  .city-icon { width: calc(72 * var(--u)); height: calc(48 * var(--u)); }
+  .nl-window.nl-dialog.select { width: calc(100% - 2 * var(--pad)); }
+  body { overflow: auto; }
+  .nl-window:not(.nl-dialog) { position: static; margin: var(--pad); }
+  .view { flex: none; height: 80vh; }
+}

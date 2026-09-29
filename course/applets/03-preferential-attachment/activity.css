@@ -1,0 +1,26 @@
+/* Layout of main_exp6.cpp (as main_exp7.cpp): view with Reset / Speed / Failure (68% of the width),
+   Context / Layout / Experiment panel on the right. ItemSpacing is the ImGui
+   default (8, 4) in this applet. */
+
+.columns { flex: 1; min-height: 0; display: flex; gap: var(--pad); }
+.left { flex: 0 0 68%; min-width: 0; display: flex; flex-direction: column; gap: calc(4 * var(--u)); }
+.right { flex: 1; display: flex; flex-direction: column; gap: calc(4 * var(--u)); }
+
+.toolbar { gap: var(--pad); }
+.toolbar label { padding-left: 0; margin-left: calc(-4 * var(--u)); }
+.view { flex: 1; min-height: 0; position: relative; margin-top: calc(4 * var(--u)); }
+#canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+.section { display: flex; flex-direction: column; gap: calc(4 * var(--u)); padding-top: calc(4 * var(--u)); }
+#pk { height: calc(100 * var(--u)); }
+#gcc-plot { height: calc(60 * var(--u)); }
+#gcc.low { color: rgb(255, 0, 0); }
+
+@media (max-width: 700px) {
+  body { overflow: auto; }
+  .nl-window { position: static; margin: var(--pad); }
+  .columns { flex-direction: column; }
+  .left { flex: none; }
+  .view { flex: none; height: 60vh; }
+  .right { overflow: visible; }
+}

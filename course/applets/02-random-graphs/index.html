@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Network Experiment</title>
+    <link rel="stylesheet" href="../shared/netlab.css?v=ee62343c" />
+    <link rel="stylesheet" href="activity.css?v=ee62343c" />
+    <script type="module" src="activity.js?v=ee62343c"></script>
+  </head>
+  <body>
+    <main class="nl-window">
+      <div class="nl-titlebar">
+        <h1 class="nl-title">Erdos-Renyi Graph - by @svalver 2016-2026</h1>
+        <button class="nl-title-button" id="scale-down" type="button" aria-label="Smaller" title="Smaller">−</button>
+        <button class="nl-title-button" id="scale-up" type="button" aria-label="Larger" title="Larger">+</button>
+      </div>
+      <div class="nl-content">
+        <div class="columns">
+          <div class="left">
+            <div class="nl-row toolbar">
+              <button class="nl-button" id="reset" type="button">Reset</button>
+              <div class="nl-frame nl-slider"><input id="speed" type="range" min="0" max="100" step="1" value="50" /><output for="speed" id="speed-value">50</output></div>
+              <label for="speed">Speed</label>
+              <button class="nl-button" id="failure" type="button" title="Disconnect a random node">Failure</button>
+              <button class="nl-button" id="attack" type="button" title="Disconnect the node with most links">Attack</button>
+            </div>
+            <div class="view"><canvas class="nl-view" id="canvas" role="img" aria-label="Network view"></canvas></div>
+          </div>
+
+          <div class="nl-child right">
+            <details class="nl-header" open>
+              <summary>Context</summary>
+              <div class="section">
+                <div class="nl-row">Nodes:&nbsp;<span class="nl-value" id="nodes">0</span></div>
+                <div class="nl-row">Links:&nbsp;<span class="nl-value" id="links">0</span></div>
+                <div class="nl-row">Undirected Graph</div>
+              </div>
+            </details>
+
+            <details class="nl-header" open>
+              <summary>Layout</summary>
+              <div class="section">
+                <div class="nl-row"><input class="nl-frame" id="distance" data-param="distance" inputmode="decimal" /><label for="distance">Distance</label></div>
+                <div class="nl-row"><input class="nl-frame" id="theta" data-param="theta" inputmode="decimal" /><label for="theta">Theta</label></div>
+                <div class="nl-row"><input class="nl-frame" id="charge" data-param="charge" inputmode="decimal" /><label for="charge">Charge</label></div>
+                <div class="nl-row"><input class="nl-frame" id="strength" data-param="strength" inputmode="decimal" /><label for="strength">Strength</label></div>
+                <div class="nl-row"><input class="nl-frame" id="gravity" data-param="gravity" inputmode="decimal" /><label for="gravity">Gravity</label></div>
+                <div class="nl-row"><input class="nl-frame" id="friction" data-param="friction" inputmode="decimal" /><label for="friction">Friction</label></div>
+              </div>
+            </details>
+
+            <details class="nl-header" open>
+              <summary>Experiment</summary>
+              <div class="section">
+                <div class="nl-row">
+                  <div class="nl-stepper">
+                    <input class="nl-frame" id="size" inputmode="numeric" />
+                    <button class="nl-button" id="size-minus" type="button" aria-label="Size minus 1">-</button>
+                    <button class="nl-button" id="size-plus" type="button" aria-label="Size plus 1">+</button>
+                  </div>
+                  <label for="size">Size</label>
+                </div>
+                <div class="nl-row"><input class="nl-frame" id="prob" inputmode="decimal" /><label for="prob">Prob Link</label></div>
+                <div class="nl-row">
+                  <div class="nl-frame nl-plot" id="pk"></div>
+                  <span class="nl-label">P(k)</span>
+                </div>
+                <div class="nl-row">max(Degree):&nbsp;<span class="nl-value" id="max-degree">0</span></div>
+                <div class="nl-row">Attacks:&nbsp;<span class="nl-value" id="attacks">0</span></div>
+                <div class="nl-row">Failures:&nbsp;<span class="nl-value" id="failures">0</span></div>
+                <div class="nl-row">Fraction GCC:&nbsp;<span class="nl-value" id="gcc">0</span></div>
+                <div class="nl-row">
+                  <div class="nl-frame nl-plot" id="gcc-plot"></div>
+                  <span class="nl-label">GCC</span>
+                </div>
+                <div class="nl-row"><button class="nl-button nl-small" id="copy" type="button" title="Copy removed nodes, f and GCC as a table">Copy</button></div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

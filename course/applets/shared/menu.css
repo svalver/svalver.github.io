@@ -1,0 +1,49 @@
+/* The activity menu as a Netlab window: a scrolling page, not a full-screen applet. */
+
+body.menu-page { overflow: auto; }
+.menu-page .nl-window {
+  position: static; overflow: visible;
+  width: min(100% - 2 * var(--pad), calc(800 * var(--u)));
+  margin: calc(22 * var(--u)) auto;
+}
+
+/* ImGui MenuBar */
+.nl-menubar {
+  display: flex; flex-wrap: wrap; gap: 0 calc(8 * var(--u));
+  min-height: var(--frame-h); padding: calc(3 * var(--u)) var(--pad);
+  background: rgba(102, 102, 140, .80);
+}
+.nl-menubar a { color: var(--text); text-decoration: none; padding: 0 calc(4 * var(--u)); }
+.nl-menubar a:hover { background: rgba(115, 115, 230, .80); }
+
+.menu-page .nl-content { display: flex; flex-direction: column; gap: calc(4 * var(--u)); }
+.menu-page p.course-name {
+  margin: calc(6 * var(--u)) 0; text-align: center; color: var(--value);
+  font-size: calc(32 * var(--u)); line-height: calc(30 * var(--u));
+}
+.banner { display: block; width: 100%; height: auto; margin-bottom: calc(4 * var(--u)); }
+.menu-page p { margin: calc(4 * var(--u)) 0; max-width: 100%; }
+.menu-page p a, .activities span a, .menu-footer a { color: rgb(179, 179, 255); text-decoration: none; }
+.menu-page p a:hover, .menu-footer a:hover { color: var(--value); text-decoration: underline; }
+
+.nl-header > summary h2 { margin: 0; font: inherit; }
+.nl-header > p { margin-left: calc(4 * var(--u)); }
+
+.activities { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: calc(4 * var(--u)); }
+.activities li { display: grid; grid-template-columns: calc(280 * var(--u)) 1fr; gap: var(--pad); align-items: start; }
+.activities .nl-button {
+  display: flex; align-items: center; height: auto; min-height: var(--frame-h);
+  color: var(--text); text-decoration: none;
+}
+.activities span { padding-top: calc(3 * var(--u)); }
+
+.menu-footer {
+  display: flex; justify-content: center; gap: calc(20 * var(--u));
+  margin-top: var(--pad); padding-top: var(--pad);
+  border-top: 1px solid rgb(128, 128, 128);
+}
+
+@media (max-width: 700px) {
+  .activities li { grid-template-columns: 1fr; gap: calc(2 * var(--u)); }
+  .activities span { padding: 0 0 calc(6 * var(--u)) calc(4 * var(--u)); }
+}

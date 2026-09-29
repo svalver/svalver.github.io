@@ -1,0 +1,27 @@
+/* Layout of main_map.cpp: the morphospace map (60% of the width) and the
+   Network / Selection panel on the right, with the selected network drawn
+   in a 300 px child window. */
+
+.columns { flex: 1; min-height: 0; display: flex; gap: var(--pad); }
+.left { flex: 0 0 60%; min-width: 0; position: relative; }
+#map { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: transparent; }
+.right { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: calc(4 * var(--u)); overflow-y: auto; }
+
+.section { display: flex; flex-direction: column; gap: calc(4 * var(--u)); padding-top: calc(4 * var(--u)); }
+.selected, .params { display: flex; flex-direction: column; gap: calc(4 * var(--u)); }
+.selected[hidden], .params[hidden], .nl-button[hidden] { display: none; }
+.buttons { gap: var(--pad); flex-wrap: wrap; }
+.nl-row > .nl-button + .narrow { margin-left: var(--pad); }
+.nl-frame.narrow, .nl-stepper.narrow { flex: 0 0 calc(80 * var(--u)); }
+.nl-stepper.narrow { flex-basis: calc(120 * var(--u)); }
+.net { position: relative; height: calc(300 * var(--u)); flex: none; }
+#canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+@media (max-width: 700px) {
+  body { overflow: auto; }
+  .nl-window { position: static; margin: var(--pad); }
+  .columns { flex-direction: column; }
+  .left { flex: none; height: 90vw; }
+  .right { overflow: visible; }
+}
+.nl-row[hidden] { display: none; }

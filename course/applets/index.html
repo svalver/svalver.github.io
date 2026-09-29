@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Introduction to Networks | Sergi Valverde</title>
+    <link rel="stylesheet" href="shared/netlab.css?v=ee62343c" />
+    <link rel="stylesheet" href="shared/menu.css?v=ee62343c" />
+    <script type="module">
+      import { initScale } from './shared/netlab-scale.js?v=ee62343c';
+      initScale(document.getElementById('scale-down'), document.getElementById('scale-up'));
+    </script>
+  </head>
+  <body class="menu-page">
+    <main class="nl-window">
+      <div class="nl-titlebar">
+        <h1 class="nl-title">Introduction to Networks</h1>
+        <button class="nl-title-button" id="scale-down" type="button" aria-label="Smaller" title="Smaller">−</button>
+        <button class="nl-title-button" id="scale-up" type="button" aria-label="Larger" title="Larger">+</button>
+      </div>
+      <nav class="nl-menubar">
+        <a href="https://svalver.github.io/">Home</a>
+        <a href="https://svalver.github.io/about">About</a>
+        <a href="https://svalver.github.io/cv">CV</a>
+        <a href="https://svalver.github.io/proj">Projects</a>
+        <a href="https://svalver.github.io/teach">Teaching</a>
+      </nav>
+
+      <div class="nl-content">
+        <p class="course-name">42589 - Biologia de Sistemas Computacional</p>
+        <img class="banner" src="shared/uv-banner.png?v=ee62343c" alt="Universitat de València. Máster Universitario en Bioinformática" />
+
+        <p>
+          This website contains a collection of online activities that are part of the curriculum
+          for the <a href="https://www.uv.es">Universitat de Valencia</a> course
+          <a href="https://webges.uv.es/uvGuiaDocenteWeb/guia?APP=uvGuiaDocenteWeb&amp;ACTION=MOSTRARGUIA.M&amp;MODULO=42589&amp;CURSOACAD=2023&amp;IDIOMA=C">"Biologia de Sistemas Computacional"</a>.
+          These lessons can be used in combination <a href="https://svalver.github.io/netlab/index.html">Netlab</a>,
+          an online application designed to assist students to develop evolutionary models
+          of complex networks.
+        </p>
+
+        <p><a href="http://svalver.github.io">Sergi Valverde</a>, a CSIC tenured scientist from
+          the <a href="https://www.ibe.upf-csic.es">Institute of Evolutionary Biology</a>
+          (<a href="https://www.csic.es/en">CSIC</a>-<a href="https://www.upf.edu/en/">UPF</a>),
+          teaches the course.</p>
+
+        <details class="nl-header" open>
+          <summary><h2>Course notes</h2></summary>
+          <p>The course slides are available for download <a href="http://svalver.github.io/course/COMPLEXNETS_UV_2024.pdf">here</a>.</p>
+        </details>
+
+        <details class="nl-header" open>
+          <summary><h2>Online activities</h2></summary>
+          <p>The following online activities require a WebGL compliant web browser.</p>
+
+          <ul class="activities">
+            <li><a class="nl-button" href="01-defining-networks/">Defining a network</a>
+              <span>Input a simple network by hand and adjust its layout parameters.</span></li>
+
+            <li><a class="nl-button" href="02-random-graphs/">A Random Graph</a>
+              <span>When determining the relevance of network patterns,
+              random graphs are utilized as null models. The Erdös-Renyi model generates random graphs
+              with a fixed connection probability (p) and a fixed number of nodes (N).</span></li>
+
+            <li><a class="nl-button" href="03-preferential-attachment/">Rich gets richer</a>
+              <span>Creates a scale-free network by a "preferential attachment" mechanism in which new nodes prefer to link to more popular old nodes..</span></li>
+
+            <li><a class="nl-button" href="04-network-fragility/">Directed attacks and random failures</a>
+              <span>This interactive website teaches you about network fragmentation and the notion of
+              percolation. How many nodes would you have to remove to fragment a city network?</span></li>
+
+            <li><a class="nl-button" href="05-shortest-paths/">Computing path lengths</a>
+              <span>Interactive visualization of shortest path lengths.</span></li>
+
+            <li><a class="nl-button" href="06-small-worlds/">Small Worlds</a>
+              <span>Add 10 shortcuts in order to minimise the average path length
+              in the urban network.</span></li>
+
+            <li><a class="nl-button" href="07-vaccination-game/">Vaccination Game</a>
+              <span>Fight the spread of infectious illnesses across an array of networks.
+              Only a limited number of vaccines are available, and the player must carefully
+              pick which nodes must be isolated in order to minimize the spread of illness.</span></li>
+
+            <li><a class="nl-button" href="08-network-modularity/">Network Modularity</a>
+              <span>This website enables users to build a
+              random modular network and calculate the modularity values.</span></li>
+
+            <li><a class="nl-button" href="09-network-morphospace/">Network Morphospace</a>
+              <span>Network morphospaces map design spaces by quantifying key network properties,
+              revealing trade-offs and constraints that shape network evolution.</span></li>
+          </ul>
+        </details>
+
+        <footer class="menu-footer">
+          <a href="mailto:svalver@gmail.com">email</a>
+          <a href="https://github.com/svalver">github.com/svalver</a>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

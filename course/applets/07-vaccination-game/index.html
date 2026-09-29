@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Network Experiment</title>
+    <link rel="stylesheet" href="../shared/netlab.css?v=ee62343c" />
+    <link rel="stylesheet" href="activity.css?v=ee62343c" />
+    <script type="module" src="activity.js?v=ee62343c"></script>
+  </head>
+  <body>
+    <main class="nl-window">
+      <div class="nl-titlebar">
+        <h1 class="nl-title">Vaccination by Sergi Valverde (@svalver) 2017-2026</h1>
+        <button class="nl-title-button" id="scale-down" type="button" aria-label="Smaller" title="Smaller">−</button>
+        <button class="nl-title-button" id="scale-up" type="button" aria-label="Larger" title="Larger">+</button>
+      </div>
+      <div class="nl-content">
+        <div class="status" aria-live="polite">
+          <div class="nl-row line1"><span id="line1"></span><span class="vaccine-icons" id="vaccine-icons" aria-hidden="true"></span></div>
+          <div class="nl-row counts" id="counts" hidden>
+            <span class="healthy">Healthy:<span id="n-healthy">0</span></span>
+            <span class="infected">Infected:<span id="n-infected">0</span></span>
+            <span class="vaccinated">Vaccinated:<span id="n-vaccinated">0</span></span>
+          </div>
+        </div>
+        <div class="view">
+          <canvas class="nl-view attack" id="canvas" role="img" aria-label="City network"></canvas>
+          <canvas class="curves" id="curves" role="img" aria-label="Healthy, infected and vaccinated nodes over time" hidden></canvas>
+        </div>
+      </div>
+    </main>
+
+    <!-- Start screen (ScreenSelect) -->
+    <div class="nl-modal clear" id="select">
+      <div class="nl-window nl-dialog select">
+        <div class="nl-titlebar"><h2 class="nl-title">Can you control an urban epidemic?</h2></div>
+        <div class="nl-content">
+          <div class="nl-row buttons pick">
+            <span>Pick your city:</span>
+            <button class="nl-button city" type="button" data-city="town"><svg class="city-icon" viewBox="0 0 72 48" aria-hidden="true"><line x1="8" y1="8" x2="22" y2="8" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="36" y1="8" x2="50" y2="8" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="50" y1="8" x2="64" y2="8" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="24" x2="22" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="24" x2="36" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="36" y1="24" x2="50" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="40" x2="22" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="40" x2="36" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="36" y1="40" x2="50" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="50" y1="40" x2="64" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="8" x2="8" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="8" x2="22" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="36" y1="8" x2="36" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="50" y1="8" x2="50" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="64" y1="8" x2="64" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="24" x2="8" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="24" x2="22" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="50" y1="24" x2="50" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="64" y1="24" x2="64" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="8" x2="64" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="3" fill="rgb(102,102,153)"/><circle cx="22" cy="8" r="3" fill="rgb(102,102,153)"/><circle cx="36" cy="8" r="3" fill="rgb(102,102,153)"/><circle cx="50" cy="8" r="3" fill="rgb(102,102,153)"/><circle cx="64" cy="8" r="3" fill="rgb(102,102,153)"/><circle cx="8" cy="24" r="3" fill="rgb(102,102,153)"/><circle cx="22" cy="24" r="3" fill="rgb(255,26,26)"/><circle cx="36" cy="24" r="3" fill="rgb(102,102,153)"/><circle cx="50" cy="24" r="3" fill="rgb(102,102,153)"/><circle cx="64" cy="24" r="3" fill="rgb(102,102,153)"/><circle cx="8" cy="40" r="3" fill="rgb(102,102,153)"/><circle cx="22" cy="40" r="3" fill="rgb(102,102,153)"/><circle cx="36" cy="40" r="3" fill="rgb(102,102,153)"/><circle cx="50" cy="40" r="3" fill="rgb(102,102,153)"/><circle cx="64" cy="40" r="3" fill="rgb(102,102,153)"/></svg><span>Town</span></button>
+            <button class="nl-button city" type="button" data-city="communities"><svg class="city-icon" viewBox="0 0 72 48" aria-hidden="true"><line x1="7" y1="10" x2="21" y2="10" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="7" y1="10" x2="7" y2="22" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="21" y1="10" x2="21" y2="22" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="7" y1="22" x2="21" y2="22" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="7" y1="10" x2="21" y2="22" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="51" y1="10" x2="65" y2="10" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="51" y1="10" x2="51" y2="22" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="65" y1="10" x2="65" y2="22" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="51" y1="22" x2="65" y2="22" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="51" y1="10" x2="65" y2="22" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="29" y1="32" x2="43" y2="32" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="29" y1="32" x2="29" y2="44" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="43" y1="32" x2="43" y2="44" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="29" y1="44" x2="43" y2="44" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="29" y1="32" x2="43" y2="44" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="21" y1="10" x2="51" y2="10" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="65" y1="22" x2="43" y2="32" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="10" r="3" fill="rgb(102,102,153)"/><circle cx="21" cy="10" r="3" fill="rgb(102,102,153)"/><circle cx="7" cy="22" r="3" fill="rgb(255,26,26)"/><circle cx="21" cy="22" r="3" fill="rgb(102,102,153)"/><circle cx="51" cy="10" r="3" fill="rgb(102,102,153)"/><circle cx="65" cy="10" r="3" fill="rgb(102,102,153)"/><circle cx="51" cy="22" r="3" fill="rgb(102,102,153)"/><circle cx="65" cy="22" r="3" fill="rgb(102,102,153)"/><circle cx="29" cy="32" r="3" fill="rgb(102,102,153)"/><circle cx="43" cy="32" r="3" fill="rgb(102,102,153)"/><circle cx="29" cy="44" r="3" fill="rgb(102,102,153)"/><circle cx="43" cy="44" r="3" fill="rgb(102,102,153)"/></svg><span>Communities</span></button>
+            <button class="nl-button city" type="button" data-city="slum"><svg class="city-icon" viewBox="0 0 72 48" aria-hidden="true"><line x1="36" y1="24" x2="50" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="50" y1="24" x2="64" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="50" y1="40" x2="64" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="8" x2="8" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="8" x2="22" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="36" y1="8" x2="36" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="50" y1="8" x2="50" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="64" y1="8" x2="64" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="24" x2="8" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="24" x2="22" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="64" y1="24" x2="64" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="36" y1="40" x2="22" y2="8" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="36" y1="8" x2="64" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="64" y1="24" x2="36" y2="24" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="36" y1="8" x2="64" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="8" x2="50" y2="40" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="8" x2="50" y2="8" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><line x1="36" y1="40" x2="50" y2="8" stroke="rgb(179,179,179)" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="3" fill="rgb(102,102,153)"/><circle cx="22" cy="8" r="3" fill="rgb(102,102,153)"/><circle cx="36" cy="8" r="3" fill="rgb(102,102,153)"/><circle cx="50" cy="8" r="3" fill="rgb(102,102,153)"/><circle cx="64" cy="8" r="3" fill="rgb(102,102,153)"/><circle cx="8" cy="24" r="3" fill="rgb(102,102,153)"/><circle cx="22" cy="24" r="3" fill="rgb(102,102,153)"/><circle cx="36" cy="24" r="3" fill="rgb(255,26,26)"/><circle cx="50" cy="24" r="3" fill="rgb(102,102,153)"/><circle cx="64" cy="24" r="3" fill="rgb(102,102,153)"/><circle cx="8" cy="40" r="3" fill="rgb(102,102,153)"/><circle cx="22" cy="40" r="3" fill="rgb(102,102,153)"/><circle cx="36" cy="40" r="3" fill="rgb(102,102,153)"/><circle cx="50" cy="40" r="3" fill="rgb(102,102,153)"/><circle cx="64" cy="40" r="3" fill="rgb(102,102,153)"/></svg><span>Slum</span></button>
+          </div>
+          <div class="nl-row scores-title">High Scores</div>
+          <table class="scores" id="scores">
+            <thead><tr><th>Town</th><th>Communities</th><th>Slum</th></tr></thead>
+            <tbody id="score-rows"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game over (ScreenGameover) -->
+    <div class="nl-modal clear" id="gameover" hidden>
+      <form class="nl-window nl-dialog gameover" id="gameover-form">
+        <div class="nl-titlebar"><h2 class="nl-title">Game Over</h2></div>
+        <div class="nl-content">
+          <div class="nl-row" id="verdict"></div>
+          <div class="nl-row" id="infected-line"></div>
+          <div class="nl-row" id="record" hidden>You have a new high-score!</div>
+          <div class="nl-row" id="name-row" hidden><input class="nl-frame" id="name" maxlength="8" autocomplete="off" autocapitalize="characters" spellcheck="false" /><label for="name">Name</label></div>
+          <div class="nl-row" id="send-status" aria-live="polite"></div>
+          <div class="nl-row"><button class="nl-button ok" type="submit" id="ok">Ok</button></div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

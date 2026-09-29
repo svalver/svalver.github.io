@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Network Experiment</title>
+    <link rel="stylesheet" href="../shared/netlab.css?v=ee62343c" />
+    <link rel="stylesheet" href="activity.css?v=ee62343c" />
+    <script type="module" src="activity.js?v=ee62343c"></script>
+  </head>
+  <body>
+    <main class="nl-window">
+      <div class="nl-titlebar">
+        <h1 class="nl-title">Network Distance - by @svalver 2016-2026</h1>
+        <button class="nl-title-button" id="scale-down" type="button" aria-label="Smaller" title="Smaller">−</button>
+        <button class="nl-title-button" id="scale-up" type="button" aria-label="Larger" title="Larger">+</button>
+      </div>
+      <div class="nl-content">
+        <div class="columns">
+          <div class="left">
+            <div class="nl-row toolbar">
+              <button class="nl-button" id="reset" type="button">Reset</button>
+              <button class="nl-button" id="failure" type="button" title="Disconnect a random node">Failure</button>
+            </div>
+            <div class="nl-row" id="instruction" aria-live="polite">Left-click to select the first node.</div>
+            <div class="view"><canvas class="nl-view attack" id="canvas" role="img" aria-label="Network view"></canvas></div>
+          </div>
+
+          <div class="nl-child right">
+            <details class="nl-header" open>
+              <summary>Context</summary>
+              <div class="section">
+                <div class="nl-row">Nodes:&nbsp;<span class="nl-value" id="nodes">0</span></div>
+                <div class="nl-row">Links:&nbsp;<span class="nl-value" id="links">0</span></div>
+                <div class="nl-row">Undirected Graph</div>
+              </div>
+            </details>
+
+            <details class="nl-header" open>
+              <summary>Experiment</summary>
+              <div class="section">
+                <div class="nl-row">Distance:&nbsp;<span class="nl-value" id="distance">0</span></div>
+                <div class="nl-row">Shortest paths:&nbsp;<span class="nl-value" id="paths">0</span></div>
+                <div class="nl-row">Eccentricity:&nbsp;<span class="nl-value" id="eccentricity">0</span></div>
+                <div class="nl-row">Diameter:&nbsp;<span class="nl-value" id="diameter">0</span></div>
+                <div class="nl-row">Mean Distance:&nbsp;<span class="nl-value" id="mean-distance">0</span></div>
+                <div class="nl-row">Global Efficiency:&nbsp;<span class="nl-value" id="efficiency">0</span></div>
+                <div class="nl-row">Failures:&nbsp;<span class="nl-value" id="failures">0</span></div>
+                <div class="nl-row">
+                  <div class="nl-frame nl-plot" id="distance-plot"></div>
+                  <span class="nl-label">Distance</span>
+                </div>
+                <div class="nl-row"><button class="nl-button nl-small" id="copy" type="button" title="Copy the distance history as a table">Copy</button></div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

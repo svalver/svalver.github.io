@@ -1,0 +1,193 @@
+/* Netlab look: the Dear ImGui 1.47 default style used by the legacy applets
+   (old_applets/netfail/imgui.cpp), composited over the applets' clear colour.
+   Every size is a multiple of --s, the UI scale set by the title-bar buttons. */
+
+@font-face {
+  font-family: 'ProggyClean';
+  src: url('fonts/ProggyClean.ttf?v=ee62343c') format('truetype');
+  font-display: block;
+}
+
+:root {
+  --s: 1;
+  --clear: rgb(114, 144, 154);
+  --window-bg: rgba(0, 0, 0, .70);
+  --border: rgba(179, 179, 179, .65);
+  --title: rgba(128, 128, 255, .55);
+  --text: rgb(230, 230, 230);
+  --value: rgb(255, 255, 0);
+  --frame: rgba(204, 204, 204, .30);
+  --frame-hover: rgba(230, 204, 204, .40);
+  --frame-active: rgba(230, 166, 166, .45);
+  --button: rgba(171, 102, 102, .60);
+  --button-hover: rgb(171, 102, 102);
+  --button-active: rgb(204, 128, 128);
+  --grab: rgba(255, 255, 255, .30);
+  --grab-active: rgb(204, 128, 128);
+  --histogram: rgb(230, 179, 0);
+  --histogram-hover: rgb(255, 153, 0);
+  --code-bg: rgb(36, 36, 73);
+  --selection: rgba(0, 0, 255, .35);
+  --scrollbar-bg: rgba(51, 64, 77, .60);
+  --scrollbar-grab: rgba(102, 102, 204, .30);
+  --tooltip: rgba(13, 13, 26, .90);
+  --error: rgb(255, 128, 128);
+  --u: calc(var(--s) * 1px);
+  --frame-h: calc(19 * var(--u));
+  --pad: calc(8 * var(--u));
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: var(--clear); color: var(--text); overflow: hidden;
+  font-family: 'ProggyClean', Menlo, Consolas, monospace;
+  /* ImGui's 13 px (ascent - descent) is a 16 px em for ProggyClean */
+  font-size: calc(16 * var(--u)); line-height: calc(13 * var(--u));
+  -webkit-font-smoothing: none; font-smooth: never;
+}
+button, input, textarea { font: inherit; color: inherit; }
+::selection { background: var(--selection); }
+:focus-visible { outline: 1px solid var(--value); outline-offset: -1px; }
+
+* { scrollbar-color: var(--scrollbar-grab) var(--scrollbar-bg); }
+
+.nl-window {
+  position: absolute; inset: var(--pad);
+  display: flex; flex-direction: column;
+  background: var(--window-bg);
+  border: 1px solid var(--border); border-radius: calc(9 * var(--u));
+  overflow: hidden;
+}
+.nl-titlebar {
+  flex: none; display: flex; align-items: center; height: var(--frame-h);
+  padding: 0 calc(2 * var(--u)) 0 var(--pad); background: var(--title);
+}
+.nl-title { flex: 1; margin: 0; font: inherit; white-space: nowrap; overflow: hidden; }
+.nl-title-button {
+  width: calc(15 * var(--u)); height: calc(15 * var(--u)); margin-left: calc(2 * var(--u));
+  display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%;
+  background: rgba(128, 128, 230, .50); cursor: pointer; line-height: 1;
+}
+.nl-title-button:hover { background: rgba(179, 179, 230, .60); }
+.nl-title-button:active { background: rgba(179, 179, 179, 1); }
+.nl-title-button:disabled { opacity: .35; cursor: default; }
+
+.nl-content { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: var(--pad); }
+
+.nl-child { border: 1px solid var(--border); min-width: 0; min-height: 0; overflow: auto; padding: var(--pad); }
+
+.nl-row { display: flex; align-items: center; min-height: var(--frame-h); white-space: nowrap; }
+/* ImGui::Text lines are one font height; only widget rows are a frame high. */
+.nl-row:not(:has(.nl-frame, .nl-button, .nl-stepper)) { min-height: calc(13 * var(--u)); }
+.nl-row > label, .nl-row > .nl-label { flex: none; padding-left: calc(4 * var(--u)); }
+.nl-value { color: var(--value); }
+
+.nl-frame {
+  flex: 0 1 65%; min-width: 0; height: var(--frame-h); padding: 0 calc(4 * var(--u));
+  border: 0; border-radius: 0; background: var(--frame);
+}
+.nl-frame:hover { background: var(--frame-hover); }
+input.nl-frame:focus { background: var(--frame-active); outline: none; }
+
+.nl-button {
+  height: var(--frame-h); padding: 0 calc(4 * var(--u)); border: 0; border-radius: 0;
+  background: var(--button); cursor: pointer;
+}
+.nl-button:hover { background: var(--button-hover); }
+.nl-button:active { background: var(--button-active); }
+
+.nl-slider { position: relative; padding: 0; }
+.nl-slider input {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 100%; margin: 0; background: transparent; cursor: pointer;
+}
+.nl-slider input::-webkit-slider-runnable-track { height: 100%; background: transparent; }
+.nl-slider input::-webkit-slider-thumb {
+  -webkit-appearance: none; width: calc(10 * var(--u)); height: calc(15 * var(--u));
+  margin-top: calc(2 * var(--u)); border: 0; border-radius: 0; background: var(--grab);
+}
+.nl-slider input:active::-webkit-slider-thumb { background: var(--grab-active); }
+.nl-slider input::-moz-range-track { height: 100%; background: transparent; }
+.nl-slider input::-moz-range-thumb { width: calc(10 * var(--u)); height: calc(15 * var(--u)); border: 0; border-radius: 0; background: var(--grab); }
+.nl-slider input:active::-moz-range-thumb { background: var(--grab-active); }
+.nl-slider output { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+
+.nl-plot { position: relative; display: flex; align-items: flex-end; gap: 1px; padding: calc(3 * var(--u)) calc(4 * var(--u)); }
+.nl-plot i { flex: 1; min-width: 1px; background: var(--histogram); }
+.nl-plot i.hover { background: var(--histogram-hover); }
+/* Removal plots: bars coloured like the removal flash */
+.nl-plot i.failure { background: rgb(200, 220, 255); }
+.nl-plot i.failure.hover { background: rgb(255, 255, 255); }
+.nl-plot i.attack { background: rgb(255, 110, 50); }
+.nl-plot i.attack.hover { background: rgb(255, 170, 110); }
+
+/* Network view canvas (NetworkView in netlab-ui.js) */
+canvas.nl-view { touch-action: none; }
+canvas.nl-view.over-node { cursor: grab; }
+canvas.nl-view.dragging { cursor: grabbing; }
+
+/* ImGui::CollapsingHeader */
+.nl-header > summary {
+  display: flex; align-items: center; gap: calc(6 * var(--u));
+  height: var(--frame-h); padding: 0 calc(4 * var(--u));
+  background: rgba(102, 102, 230, .45); cursor: pointer; list-style: none;
+}
+.nl-header > summary::-webkit-details-marker { display: none; }
+.nl-header > summary::before {
+  content: ''; width: 0; height: 0;
+  border-left: calc(4 * var(--u)) solid transparent; border-right: calc(4 * var(--u)) solid transparent;
+  border-top: calc(7 * var(--u)) solid var(--text);
+}
+.nl-header:not([open]) > summary::before {
+  border-top: calc(4 * var(--u)) solid transparent; border-bottom: calc(4 * var(--u)) solid transparent;
+  border-left: calc(7 * var(--u)) solid var(--text); border-right: 0;
+}
+.nl-header > summary:hover { background: rgba(115, 115, 230, .80); }
+.nl-header > summary:active { background: rgba(135, 135, 222, .80); }
+
+/* ImGui::SmallButton: a button without vertical frame padding */
+.nl-button.nl-small { height: calc(13 * var(--u)); line-height: calc(13 * var(--u)); }
+
+/* ImGui::Checkbox */
+.nl-row > label.nl-checkbox { display: flex; align-items: center; gap: calc(4 * var(--u)); padding-left: 0; cursor: pointer; }
+.nl-checkbox input {
+  -webkit-appearance: none; appearance: none; margin: 0; flex: none;
+  width: var(--frame-h); height: var(--frame-h); background: var(--frame); cursor: pointer;
+  display: grid; place-items: center;
+}
+.nl-checkbox input:hover { background: var(--frame-hover); }
+.nl-checkbox input:active { background: var(--frame-active); }
+.nl-checkbox input:checked::after {
+  content: ''; width: calc(11 * var(--u)); height: calc(11 * var(--u));
+  background: rgba(230, 230, 230, .50);
+}
+
+/* ImGui::InputInt: value frame followed by - and + buttons */
+.nl-stepper { flex: 0 1 65%; min-width: 0; display: flex; gap: calc(4 * var(--u)); }
+.nl-stepper .nl-frame { flex: 1; width: auto; }
+.nl-stepper .nl-button { flex: none; width: var(--frame-h); padding: 0; }
+
+.nl-splitter-v { flex: none; width: var(--pad); cursor: col-resize; }
+.nl-splitter-h { flex: none; height: var(--pad); cursor: row-resize; }
+
+.nl-tooltip {
+  position: fixed; z-index: 10; padding: calc(4 * var(--u)) var(--pad); pointer-events: none;
+  background: var(--tooltip); white-space: pre;
+}
+
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ImGui modal popup (ModalWindowDarkening) */
+.nl-modal {
+  position: fixed; inset: 0; z-index: 20;
+  display: grid; place-items: center; background: rgba(51, 51, 51, .35);
+}
+.nl-modal[hidden] { display: none; }
+.nl-window.nl-dialog {
+  position: static; width: min(100% - 2 * var(--pad), calc(420 * var(--u)));
+  background: rgba(0, 0, 0, .85); overflow: visible;
+}
+.nl-dialog .nl-content { gap: calc(4 * var(--u)); }
+.nl-dialog .buttons { gap: var(--pad); }

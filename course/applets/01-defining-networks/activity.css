@@ -1,0 +1,33 @@
+/* Layout of main_netlab.cpp: view | code on top, Info / Layout / P(k) panels below. */
+
+.top { flex: none; display: flex; min-height: 0; }
+.view { flex: 1; position: relative; padding: 0; overflow: hidden; }
+#canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+.code { flex: none; display: flex; flex-direction: column; padding: var(--pad); }
+.code .nl-button { align-self: flex-start; }
+#source {
+  flex: 1; min-height: 0; width: 100%; resize: none;
+  padding: calc(3 * var(--u)) calc(4 * var(--u)); border: 0; border-radius: 0; outline: none;
+  background: var(--code-bg); color: #fff; white-space: pre; overflow: auto;
+}
+#source:focus-visible { box-shadow: inset 0 0 0 1px var(--value); }
+.error { color: var(--error); overflow: hidden; text-overflow: ellipsis; }
+
+.panels { flex: 1; display: flex; padding: 0; overflow: auto; }
+.panels > .nl-child { flex-shrink: 0; overflow: hidden; }
+.info { flex: 200 1 0; }
+.layout { flex: 300 1 0; }
+.pk { flex: 250 1 0; }
+#plot { height: calc(110 * var(--u)); }
+
+@media (max-width: 700px) {
+  body { overflow: auto; }
+  .nl-window { position: static; margin: var(--pad); }
+  .top { flex-direction: column; height: auto !important; }
+  .view { height: 60vh; flex: none; width: auto !important; }
+  .code { width: auto !important; height: 220px; }
+  .nl-splitter-v, .nl-splitter-h { display: none; }
+  .panels { flex-wrap: wrap; }
+  .panels > .nl-child { flex: 1 1 100%; }
+}

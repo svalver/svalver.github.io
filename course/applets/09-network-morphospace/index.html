@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Network Experiment</title>
+    <link rel="stylesheet" href="../shared/netlab.css?v=ee62343c" />
+    <link rel="stylesheet" href="activity.css?v=ee62343c" />
+    <script type="module" src="activity.js?v=ee62343c"></script>
+  </head>
+  <body>
+    <main class="nl-window">
+      <div class="nl-titlebar">
+        <h1 class="nl-title">Morphospace Viewer - by @svalver 2016-2026</h1>
+        <button class="nl-title-button" id="scale-down" type="button" aria-label="Smaller" title="Smaller">−</button>
+        <button class="nl-title-button" id="scale-up" type="button" aria-label="Larger" title="Larger">+</button>
+      </div>
+      <div class="nl-content">
+        <div class="columns">
+          <div class="left">
+            <canvas class="nl-view" id="map" role="img" aria-label="Morphospace: degeneracy against determinism"></canvas>
+          </div>
+
+          <div class="nl-child right">
+            <details class="nl-header" open>
+              <summary>Network</summary>
+              <div class="section">
+                <div class="nl-row">Nodes:&nbsp;<span class="nl-value" id="nodes">50</span></div>
+                <div class="nl-row buttons">
+                  <button class="nl-button" type="button" data-hatch="ER" title="Erdos-Renyi graph with a random p">ER</button>
+                  <button class="nl-button" type="button" data-hatch="PA" title="Preferential attachment with a random m">PA</button>
+                  <button class="nl-button" type="button" data-hatch="Ring" title="Ring lattice">Ring</button>
+                  <button class="nl-button" type="button" data-hatch="Star" title="Star">Star</button>
+                  <button class="nl-button" type="button" data-hatch="GNC" title="Growing network with copying, random m, p, q">GNC</button>
+                </div>
+                <div class="nl-row buttons">
+                  <button class="nl-button nl-small" type="button" data-hatch="ER" data-count="10" title="Add 10 ER networks">ER ×10</button>
+                  <button class="nl-button nl-small" type="button" data-hatch="PA" data-count="10" title="Add 10 PA networks">PA ×10</button>
+                  <button class="nl-button nl-small" type="button" data-hatch="GNC" data-count="10" title="Add 10 GNC networks">GNC ×10</button>
+                </div>
+                <div class="nl-row"><label class="nl-checkbox" title="Shade the region covered by each family"><input type="checkbox" id="regions" checked />Show Regions</label></div>
+              </div>
+            </details>
+
+            <details class="nl-header" open>
+              <summary>Selection</summary>
+              <div class="section">
+                <div class="nl-row" id="selected-name">No network selected</div>
+                <div class="selected" id="selected" hidden>
+                  <div class="nl-row"><button class="nl-button" id="save" type="button" title="Save the network as a Pajek file (sel.net)">Save</button></div>
+                  <div class="nl-row">Links:&nbsp;<span class="nl-value" id="links">0</span></div>
+                  <div class="nl-row">Degeneracy:&nbsp;<span class="nl-value" id="degeneracy">0</span></div>
+                  <div class="nl-row">Determinism:&nbsp;<span class="nl-value" id="determinism">0</span></div>
+                  <div class="nl-row">EI:&nbsp;<span class="nl-value" id="ei">0</span></div>
+
+                  <div class="params" data-model="ER">
+                    <div class="nl-row">
+                      <button class="nl-button" type="button" data-sample>Sample</button>
+                      <input class="nl-frame narrow" id="er-p" inputmode="decimal" /><label for="er-p">p (prob)</label>
+                    </div>
+                  </div>
+                  <div class="params" data-model="PA">
+                    <div class="nl-row">
+                      <button class="nl-button" type="button" data-sample>Sample</button>
+                      <div class="nl-stepper narrow">
+                        <input class="nl-frame" id="pa-m" inputmode="numeric" />
+                        <button class="nl-button" type="button" data-step="-1" aria-label="m minus 1">-</button>
+                        <button class="nl-button" type="button" data-step="1" aria-label="m plus 1">+</button>
+                      </div>
+                      <label for="pa-m">m (edges)</label>
+                    </div>
+                  </div>
+                  <div class="params" data-model="GNC">
+                    <div class="nl-row buttons">
+                      <button class="nl-button" type="button" data-sample>Sample</button>
+                      <button class="nl-button" type="button" data-sample="log" title="Sample with q = 1 / m">Sample (log)</button>
+                    </div>
+                    <div class="nl-row">
+                      <div class="nl-stepper narrow">
+                        <input class="nl-frame" id="gnc-m" inputmode="numeric" />
+                        <button class="nl-button" type="button" data-step="-1" aria-label="m minus 1">-</button>
+                        <button class="nl-button" type="button" data-step="1" aria-label="m plus 1">+</button>
+                      </div>
+                      <label for="gnc-m">m (edges)</label>
+                    </div>
+                    <div class="nl-row"><input class="nl-frame narrow" id="gnc-p" inputmode="decimal" /><label for="gnc-p">p (prob)</label></div>
+                    <div class="nl-row"><input class="nl-frame narrow" id="gnc-q" inputmode="decimal" /><label for="gnc-q">q (prob)</label></div>
+                  </div>
+
+                  <div class="net"><canvas class="nl-view" id="canvas" role="img" aria-label="Selected network"></canvas></div>
+                </div>
+                <div class="nl-row" hidden><button class="nl-button" id="remove" type="button">Remove Selected</button></div>
+                <div class="nl-row"><button class="nl-button" id="delete-all" type="button">Delete All</button></div>
+                <div class="nl-row"><button class="nl-button nl-small" id="copy" type="button" title="Copy every point as a table: family, m, p, q, links, degeneracy, determinism, EI">Copy</button></div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

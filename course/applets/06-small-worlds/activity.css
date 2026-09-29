@@ -1,0 +1,29 @@
+/* Layout of main_exp4.cpp: Reset / Speed / Failures and the instruction line
+   above the view (68% of the width), Context / Layout / Experiment on the right. ItemSpacing is the ImGui
+   default (8, 4) in this applet. */
+
+.columns { flex: 1; min-height: 0; display: flex; gap: var(--pad); }
+.left { flex: 0 0 68%; min-width: 0; display: flex; flex-direction: column; gap: calc(4 * var(--u)); }
+.right { flex: 1; display: flex; flex-direction: column; gap: calc(4 * var(--u)); }
+
+.toolbar { gap: var(--pad); }
+.toolbar label { padding-left: 0; margin-left: calc(-4 * var(--u)); }
+.view { flex: 1; min-height: 0; position: relative; }
+#canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+.section { display: flex; flex-direction: column; gap: calc(4 * var(--u)); padding-top: calc(4 * var(--u)); }
+#apl-plot { height: calc(60 * var(--u)); }
+.nl-plot i.random { background: rgb(110, 220, 210); }      /* Random Shortcut */
+canvas.nl-view.attack.over-node { cursor: pointer; }
+
+@media (max-width: 700px) {
+  body { overflow: auto; }
+  .nl-window { position: static; margin: var(--pad); }
+  .columns { flex-direction: column; }
+  .left { flex: none; }
+  .view { flex: none; height: 60vh; }
+  .right { overflow: visible; }
+}
+
+.buttons { gap: var(--pad); }
+#send-status.error { color: var(--error); }
