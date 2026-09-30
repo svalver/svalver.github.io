@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'ProggyClean';
-  src: url('fonts/ProggyClean.ttf?v=ee62343c') format('truetype');
+  src: url('fonts/ProggyClean.ttf?v=2e3e9bc0') format('truetype');
   font-display: block;
 }
 
@@ -97,6 +97,7 @@ input.nl-frame:focus { background: var(--frame-active); outline: none; }
 }
 .nl-button:hover { background: var(--button-hover); }
 .nl-button:active { background: var(--button-active); }
+.nl-button:disabled, .nl-button:disabled:hover { background: var(--button); opacity: .35; cursor: default; }
 
 .nl-slider { position: relative; padding: 0; }
 .nl-slider input {

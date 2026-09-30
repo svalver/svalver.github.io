@@ -1,9 +1,9 @@
 // Port of old_applets/netfail/main_exp6.cpp ("Preferential Attachment - by @svalver 2016-2026"),
 // preferential-attachment branch (the rule in the published exp6 build).
-import { degrees, degreeDistribution, largestComponentFraction, disconnect, randomConnectedNode, highestDegreeNode } from '../shared/graph.js?v=ee62343c';
-import { ForceLayout } from '../shared/force-layout.js?v=ee62343c';
-import { initScale, onScale } from '../shared/netlab-scale.js?v=ee62343c';
-import { NetworkView, Histogram, bindSpeed, bindLayoutParams, bindCopy, gccTable } from '../shared/netlab-ui.js?v=ee62343c';
+import { degrees, degreeDistribution, largestComponentFraction, disconnect, randomConnectedNode, highestDegreeNode } from '../shared/graph.js?v=2e3e9bc0';
+import { ForceLayout } from '../shared/force-layout.js?v=2e3e9bc0';
+import { initScale, onScale } from '../shared/netlab-scale.js?v=2e3e9bc0';
+import { NetworkView, Histogram, bindSpeed, bindLayoutParams, bindCopy, gccTable, pkTable } from '../shared/netlab-ui.js?v=2e3e9bc0';
 
 const $ = id => document.getElementById(id);
 
@@ -137,6 +137,7 @@ $('reset').addEventListener('click', reset);
 $('failure').addEventListener('click', failure);
 $('attack').addEventListener('click', attack);
 bindCopy($('copy'), () => gccTable(gccHistory, graph.n, gccKinds));
+bindCopy($('copy-pk'), () => pkTable(degrees(graph), { log: true }));
 
 initScale($('scale-down'), $('scale-up'));
 onScale(() => { view.dirty = true; });

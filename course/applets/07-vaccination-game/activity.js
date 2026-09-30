@@ -1,10 +1,10 @@
 // Port of old_applets/netfail/main_vaccine.cpp
 // ("Vaccination by Sergi Valverde (@svalver) 2017-2026").
-import { ForceLayout, normalizeCoordinates } from '../shared/force-layout.js?v=ee62343c';
-import { initScale, onScale, getScale } from '../shared/netlab-scale.js?v=ee62343c';
-import { NetworkView } from '../shared/netlab-ui.js?v=ee62343c';
-import { Epidemic, S, I, R, STEPS_PER_SECOND } from './sim.js?v=ee62343c';
-import { Curves } from './curves.js?v=ee62343c';
+import { ForceLayout, normalizeCoordinates } from '../shared/force-layout.js?v=2e3e9bc0';
+import { initScale, onScale, getScale } from '../shared/netlab-scale.js?v=2e3e9bc0';
+import { NetworkView } from '../shared/netlab-ui.js?v=2e3e9bc0';
+import { Epidemic, S, I, R, STEPS_PER_SECOND } from './sim.js?v=2e3e9bc0';
+import { Curves } from './curves.js?v=2e3e9bc0';
 
 const $ = id => document.getElementById(id);
 
@@ -305,6 +305,6 @@ fetch('/api/info').then(r => r.ok ? r.json() : null).then(info => {
   renderScores();
 }).catch(() => {});
 
-cities = await (await fetch('cities.json?v=ee62343c')).json();
+cities = await (await fetch('cities.json?v=2e3e9bc0')).json();
 showSelect();
 requestAnimationFrame(tick);

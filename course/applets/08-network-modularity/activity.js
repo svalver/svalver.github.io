@@ -1,9 +1,9 @@
 // Port of old_applets/netfail/main_exp5.cpp ("Network Modularity - by @svalver 2016-2026").
-import { degrees, largestComponentFraction } from '../shared/graph.js?v=ee62343c';
-import { ForceLayout, normalizeCoordinates } from '../shared/force-layout.js?v=ee62343c';
-import { initScale, onScale } from '../shared/netlab-scale.js?v=ee62343c';
-import { NetworkView, Histogram, bindSpeed, bindLayoutParams, bindFloat, bindCopy } from '../shared/netlab-ui.js?v=ee62343c';
-import { randomModularGraph, communities, moduleColor, moduleOf, pairCounts } from './modularity.js?v=ee62343c';
+import { degrees, largestComponentFraction } from '../shared/graph.js?v=2e3e9bc0';
+import { ForceLayout, normalizeCoordinates } from '../shared/force-layout.js?v=2e3e9bc0';
+import { initScale, onScale } from '../shared/netlab-scale.js?v=2e3e9bc0';
+import { NetworkView, Histogram, bindSpeed, bindLayoutParams, bindFloat, bindCopy } from '../shared/netlab-ui.js?v=2e3e9bc0';
+import { randomModularGraph, communities, moduleColor, moduleOf, pairCounts } from './modularity.js?v=2e3e9bc0';
 
 const $ = id => document.getElementById(id);
 
@@ -118,6 +118,10 @@ for (const [id, name] of [['p-intra', 'pIntra'], ['p-inter', 'pInter']]) {
   $(id).addEventListener('change', showExperiment);
 }
 
+// Enter in an Experiment value generates the new network at once (as Reset).
+for (const id of ['size', 'modules', 'p-intra', 'p-inter']) {
+  $(id).addEventListener('keydown', event => { if (event.key === 'Enter') reset(); });
+}
 $('reset').addEventListener('click', reset);
 $('failure').addEventListener('click', failure);
 $('planted').addEventListener('change', () => { view.dirty = true; });

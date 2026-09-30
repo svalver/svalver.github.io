@@ -1,9 +1,9 @@
 // Port of old_applets/netfail/main_exp1.cpp ("Network Fragmentation - by @svalver 2016-2026").
-import { parseEdgeList, degrees, largestComponentFraction, disconnect, randomConnectedNode, highestDegreeNode } from '../shared/graph.js?v=ee62343c';
-import { normalizeCoordinates } from '../shared/force-layout.js?v=ee62343c';
-import { initScale, onScale } from '../shared/netlab-scale.js?v=ee62343c';
-import { NetworkView, Histogram, bindCopy, gccTable } from '../shared/netlab-ui.js?v=ee62343c';
-import { vertexCoord, edgeList } from '../shared/city.js?v=ee62343c';
+import { parseEdgeList, degrees, largestComponentFraction, disconnect, randomConnectedNode, highestDegreeNode } from '../shared/graph.js?v=2e3e9bc0';
+import { normalizeCoordinates } from '../shared/force-layout.js?v=2e3e9bc0';
+import { initScale, onScale } from '../shared/netlab-scale.js?v=2e3e9bc0';
+import { NetworkView, Histogram, bindCopy, gccTable } from '../shared/netlab-ui.js?v=2e3e9bc0';
+import { vertexCoord, edgeList } from '../shared/city.js?v=2e3e9bc0';
 
 const $ = id => document.getElementById(id);
 

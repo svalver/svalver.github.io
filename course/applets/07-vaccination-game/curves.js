@@ -1,6 +1,6 @@
 // Inset plot of the epidemic: H(t) healthy, I(t) infected, V(t) vaccinated
 // (and quarantined), one point per step, drawn like an ImGui child window.
-import { getScale } from '../shared/netlab-scale.js?v=ee62343c';
+import { getScale } from '../shared/netlab-scale.js?v=2e3e9bc0';
 
 export const CURVE_COLORS = {
   healthy: 'rgb(150,150,215)',   // brighter than the node colour, to read on the dark frame

@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Network Experiment</title>
-    <link rel="stylesheet" href="../shared/netlab.css?v=ee62343c" />
-    <link rel="stylesheet" href="activity.css?v=ee62343c" />
-    <script type="module" src="activity.js?v=ee62343c"></script>
+    <link rel="stylesheet" href="../shared/netlab.css?v=2e3e9bc0" />
+    <link rel="stylesheet" href="activity.css?v=2e3e9bc0" />
+    <script type="module" src="activity.js?v=2e3e9bc0"></script>
   </head>
   <body>
     <main class="nl-window">
@@ -38,7 +38,7 @@
               </div>
             </details>
 
-            <details class="nl-header" open>
+            <details class="nl-header">
               <summary>Layout</summary>
               <div class="section">
                 <div class="nl-row"><input class="nl-frame" id="distance" data-param="distance" inputmode="decimal" /><label for="distance">Distance</label></div>
@@ -74,6 +74,7 @@
                   <div class="nl-frame nl-plot" id="pk"></div>
                   <span class="nl-label">P(k)</span>
                 </div>
+                <div class="nl-row"><button class="nl-button nl-small" id="copy-pk" type="button" title="Copy the degree distribution as a table: k, nodes, P(k), log10(k), log10(P(k))">Copy</button></div>
                 <div class="nl-row">max(Degree):&nbsp;<span class="nl-value" id="max-degree">0</span></div>
                 <div class="nl-row">Attacks:&nbsp;<span class="nl-value" id="attacks">0</span></div>
                 <div class="nl-row">Failures:&nbsp;<span class="nl-value" id="failures">0</span></div>

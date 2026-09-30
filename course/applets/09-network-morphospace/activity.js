@@ -1,10 +1,10 @@
 // Port of old_applets/morphospace/main_map.cpp and models.cpp
 // ("Morphospace Viewer by @svalver (2016-2024)").
-import { degrees } from '../shared/graph.js?v=ee62343c';
-import { ForceLayout, NETLAB_LAYOUT, normalizeCoordinates } from '../shared/force-layout.js?v=ee62343c';
-import { initScale, getScale, onScale } from '../shared/netlab-scale.js?v=ee62343c';
-import { NetworkView, bindCopy } from '../shared/netlab-ui.js?v=ee62343c';
-import { NETWORK_SIZE, erdosRenyi, preferentialAttachment, ringLattice, star, gnc, measures, pajek } from './morphospace.js?v=ee62343c';
+import { degrees } from '../shared/graph.js?v=2e3e9bc0';
+import { ForceLayout, NETLAB_LAYOUT, normalizeCoordinates } from '../shared/force-layout.js?v=2e3e9bc0';
+import { initScale, getScale, onScale } from '../shared/netlab-scale.js?v=2e3e9bc0';
+import { NetworkView, bindCopy } from '../shared/netlab-ui.js?v=2e3e9bc0';
+import { NETWORK_SIZE, erdosRenyi, preferentialAttachment, ringLattice, star, gnc, measures, pajek } from './morphospace.js?v=2e3e9bc0';
 
 const $ = id => document.getElementById(id);
 const N = NETWORK_SIZE;
@@ -125,6 +125,14 @@ function setParam(key, value) {
 for (const model of Object.values(inputs)) {
   for (const [key, input] of Object.entries(model)) {
     input.addEventListener('change', () => setParam(key, Number(input.value)));
+    // GNC waits for Sample; Enter applies the value and samples at once.
+    if (model === inputs.GNC) {
+      input.addEventListener('keydown', event => {
+        if (event.key !== 'Enter' || !selected) return;
+        setParam(key, Number(input.value));
+        sample(selected);
+      });
+    }
     const stepper = input.closest('.nl-stepper');
     if (stepper) {
       for (const button of stepper.querySelectorAll('[data-step]')) {

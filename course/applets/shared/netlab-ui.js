@@ -1,6 +1,6 @@
 // Widgets shared by the Netlab applets: the network view, ImGui-style plots,
 // the Speed slider and the layout inputs.
-import { getScale } from './netlab-scale.js?v=ee62343c';
+import { getScale } from './netlab-scale.js?v=2e3e9bc0';
 
 // --- Network view ------------------------------------------------------------
 
@@ -498,6 +498,19 @@ export function bindCopy(button, table) {
     setTimeout(() => { button.textContent = label; }, 1500);
   });
 }
+
+// The degree distribution as a table: k, number of nodes with degree k, P(k).
+// With log: also log10(k) and log10(P(k)), empty where k or P(k) is 0, for
+// fitting a power law P(k) ~ k^-gamma as a straight line on log-log axes.
+export const pkTable = (k, { log = false } = {}) => ({
+  header: ['k', 'nodes', 'P(k)', ...(log ? ['log10(k)', 'log10(P(k))'] : [])],
+  rows: Array.from({ length: k.length ? Math.max(...k) + 1 : 0 }, (_, d) => {
+    const count = k.filter(x => x === d).length, p = count / k.length;
+    const row = [d, count, p.toFixed(4)];
+    if (log) row.push(d > 0 ? Math.log10(d).toFixed(4) : '', p > 0 ? Math.log10(p).toFixed(4) : '');
+    return row;
+  }),
+});
 
 // The GCC curve as a table: removals, f = removals / N, Fraction GCC, and
 // which removal produced each row (failure or attack; empty for the start).

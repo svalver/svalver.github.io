@@ -1,8 +1,8 @@
 // Port of old_applets/netfail/main_netlab.cpp ("Network Editor by @svalver 2018-2026").
-import { parseEdgeList, degrees, degreeDistribution } from '../shared/graph.js?v=ee62343c';
-import { ForceLayout, NETLAB_LAYOUT, randomPositions } from '../shared/force-layout.js?v=ee62343c';
-import { getScale, initScale, onScale } from '../shared/netlab-scale.js?v=ee62343c';
-import { NetworkView, Histogram, bindSpeed, bindLayoutParams } from '../shared/netlab-ui.js?v=ee62343c';
+import { parseEdgeList, degrees, degreeDistribution } from '../shared/graph.js?v=2e3e9bc0';
+import { ForceLayout, NETLAB_LAYOUT, randomPositions } from '../shared/force-layout.js?v=2e3e9bc0';
+import { getScale, initScale, onScale } from '../shared/netlab-scale.js?v=2e3e9bc0';
+import { NetworkView, Histogram, bindSpeed, bindLayoutParams } from '../shared/netlab-ui.js?v=2e3e9bc0';
 
 const $ = id => document.getElementById(id);
 const source = $('source');

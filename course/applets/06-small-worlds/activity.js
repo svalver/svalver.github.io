@@ -1,8 +1,8 @@
 // Port of old_applets/netfail/main_exp4.cpp ("Small World - by @svalver 2016-2026").
-import { lattice, degrees, distancesFrom, distanceStats } from '../shared/graph.js?v=ee62343c';
-import { ForceLayout, normalizeCoordinates } from '../shared/force-layout.js?v=ee62343c';
-import { initScale, onScale } from '../shared/netlab-scale.js?v=ee62343c';
-import { NetworkView, Histogram, bindSpeed, bindLayoutParams, bindCopy } from '../shared/netlab-ui.js?v=ee62343c';
+import { lattice, degrees, distancesFrom, distanceStats } from '../shared/graph.js?v=2e3e9bc0';
+import { ForceLayout, normalizeCoordinates } from '../shared/force-layout.js?v=2e3e9bc0';
+import { initScale, onScale } from '../shared/netlab-scale.js?v=2e3e9bc0';
+import { NetworkView, Histogram, bindSpeed, bindLayoutParams, bindCopy } from '../shared/netlab-ui.js?v=2e3e9bc0';
 
 const $ = id => document.getElementById(id);
 const SIDE = 16; // create_lattice(16, 16)

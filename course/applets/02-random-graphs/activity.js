@@ -1,8 +1,8 @@
 // Port of old_applets/netfail/main_exp7.cpp ("Erdos-Renyi Graph - by @svalver 2016-2026").
-import { randomGraph, degrees, degreeDistribution, largestComponentFraction, disconnect, randomConnectedNode, highestDegreeNode } from '../shared/graph.js?v=ee62343c';
-import { ForceLayout } from '../shared/force-layout.js?v=ee62343c';
-import { initScale, onScale } from '../shared/netlab-scale.js?v=ee62343c';
-import { NetworkView, Histogram, bindSpeed, bindLayoutParams, bindFloat, bindCopy, gccTable } from '../shared/netlab-ui.js?v=ee62343c';
+import { randomGraph, degrees, degreeDistribution, largestComponentFraction, disconnect, randomConnectedNode, highestDegreeNode } from '../shared/graph.js?v=2e3e9bc0';
+import { ForceLayout } from '../shared/force-layout.js?v=2e3e9bc0';
+import { initScale, onScale } from '../shared/netlab-scale.js?v=2e3e9bc0';
+import { NetworkView, Histogram, bindSpeed, bindLayoutParams, bindFloat, bindCopy, gccTable, pkTable } from '../shared/netlab-ui.js?v=2e3e9bc0';
 
 const $ = id => document.getElementById(id);
 
@@ -92,6 +92,8 @@ sizeInput.addEventListener('input', () => {
   if (sizeInput.value.trim() !== '' && Number.isFinite(value)) { experiment.size = value; clampExperiment(); }
 });
 sizeInput.addEventListener('change', showExperiment);
+// Enter in Size or Prob Link generates the new graph at once (as Reset).
+for (const input of [sizeInput, probInput]) input.addEventListener('keydown', event => { if (event.key === 'Enter') reset(); });
 $('size-minus').addEventListener('click', () => { experiment.size--; clampExperiment(); showExperiment(); });
 $('size-plus').addEventListener('click', () => { experiment.size++; clampExperiment(); showExperiment(); });
 bindFloat(probInput, () => experiment.probLink, value => { experiment.probLink = value; clampExperiment(); });
@@ -101,6 +103,7 @@ $('reset').addEventListener('click', reset);
 $('failure').addEventListener('click', failure);
 $('attack').addEventListener('click', attack);
 bindCopy($('copy'), () => gccTable(gccHistory, graph.n, gccKinds));
+bindCopy($('copy-pk'), () => pkTable(degrees(graph)));
 
 initScale($('scale-down'), $('scale-up'));
 onScale(() => { view.dirty = true; });
