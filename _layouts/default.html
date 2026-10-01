@@ -12,7 +12,7 @@
 		<meta property="og:url" content="{{ page.url | absolute_url }}">
 		<meta property="og:site_name" content="{{ site.name }}">
 		<link rel="icon" href="{{ '/images/favicon.svg' | relative_url }}" type="image/svg+xml">
-		<link rel="stylesheet" type="text/css" href="/css/main.css">
+		<link rel="stylesheet" type="text/css" href="/css/main.css?v={{ site.time | date: '%s' }}">
 		<link rel="stylesheet" href="/css/navigation.css">
 	</head>
 	<body>
@@ -31,7 +31,7 @@
 		</main>
 		<footer>
 	    		<ul>
-	        		<li><a href="mailto:svalver@gmail.com">email</a></li>
+				<li><a href="mailto:{{ page.contact_email | default: 'svalver@gmail.com' }}">email</a></li>
         			<li><a href="https://github.com/svalver">github.com/svalver</a></li>
         		</ul>
 		</footer>
