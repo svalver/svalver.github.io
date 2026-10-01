@@ -1,0 +1,8 @@
+/* Shared navigation for Jekyll pages and the generated CV. */
+.site-navigation ul { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.1em; line-height: 1.6em; font-weight: bold;
+  padding: 0; margin: 1em 0; list-style: none; color: #333; }
+.site-navigation ul li { display: inline; margin: 0 20px 0 0; padding: 0; }
+.site-navigation a { color: #0056b3; text-decoration: none; }
+.site-navigation a:hover, .site-navigation a:focus { text-decoration: underline; }
+@media (max-width: 768px) { .site-navigation ul li { margin-right: 10px; } }
