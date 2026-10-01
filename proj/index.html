@@ -1,52 +1,59 @@
 ---
 layout: default
 title: Projects
-description: Software projects from the Evolution of Networks Lab, including Netlab and BiMat.
+contact_email: s.valverde@csic.es
+description: Software projects from the Evolution of Networks Lab, including Netlab, BiMat and Fractal Patenting.
 ---
 
 <div class="content-page">
     <h1>Software Projects</h1>
     <p><img src="../images/projects_header.jpg" alt="Projects Header Image"/></p>
-    
+
     <h2>Netlab: Visualization and Analysis of Complex Networks</h2>
     <p>
-        Netlab is a research-supported software platform developed for the analysis, modeling, and visualization of complex networks. Over the last decade, Netlab has contributed to numerous publications, and its visual renderings have been featured in popular media, including *The New York Times Magazine* (March 12, 2006) and a special *Nature* issue on Ecological Complexity (Vol. 442, No. 7100, July 20, 2006).
+        Netlab is a research-supported software platform developed for the analysis, modeling, and visualization of complex networks. It has supported research publications, and its visual renderings have appeared in <em>The New York Times Magazine</em> (March 12, 2006) and a special <em>Nature</em> issue on Ecological Complexity (Vol. 442, No. 7100, July 20, 2006).
     </p>
     <p>
-        View an example of our network-based approach to the large-scale evolution of programming languages <a href="{{ '/Proglang/' | relative_url }}">here</a>.
+        The <a href="{{ '/Proglang/' | relative_url }}">programming-language project</a> illustrates its use in reconstructing large-scale evolutionary relationships.
     </p>
     <p>
-        Check out an example of real-time rendering in Netlab <a href="https://www.youtube.com/watch?v=Y8rxdbKc0m8">here</a>.
+        <a href="https://www.youtube.com/watch?v=Y8rxdbKc0m8">Edge-Bundling of Programming Language Influences</a> shows an example of real-time rendering in Netlab.
     </p>
-    
-    <h2>Netlab Web</h2>
+
     <p><img src="../images/netlab_lite_screenshot.png" alt="Netlab Lite Screenshot"/></p>
     <p>
-        Access <a href="{{ '/netlab/l2/nl.html' | relative_url }}">Netlab Lite</a>, an online, compact version of the full Netlab platform. Netlab Lite enables students to program network models and conduct common analyses directly within a web browser (requires WebGL; Chrome or Firefox is recommended). This online tool brings the power of Netlab to an accessible, web-based environment.
+        Access <a href="{{ '/netlab/l2/nl.html' | relative_url }}">Netlab Lite</a>, an online, compact version of the full Netlab platform. Netlab Lite enables students to program network models and conduct common analyses directly within a web browser (requires WebGL; Chrome or Firefox is recommended).
     </p>
-    
+
+    <h2>BiMat: Analysis of Bipartite Ecological Networks</h2>
+    <p>
+        BiMat is an open-source MATLAB library designed for analyzing modularity and nestedness in bipartite ecological networks. Developed in collaboration with César Flores, Timothée Poisot, and Joshua Weitz, BiMat offers features such as modularity and nestedness calculations, diversity indices (Shannon and Simpson), null models for creating random bipartite networks, and additional network statistics.
+    </p>
+    <p>
+        The <a href="https://github.com/cesar7f/BiMat">source code</a> and <a href="https://bimat.github.io">documentation</a> accompany the <a href="https://doi.org/10.1111/2041-210X.12458">BiMat software paper</a>.
+    </p>
+
+    <h2>Fractal Patenting</h2>
+    <p><img src="{{ '/images/projects/fractal-patenting-biotech-clusters.png' | relative_url }}" alt="Geographical distribution of biotechnology patent clusters across the contiguous United States" loading="lazy"/></p>
+    <p>
+        <a href="https://github.com/svalver/fractal-patenting">Fractal Patenting</a> brings together geolocated U.S. patent data, Python scripts and notebooks for analysing spatial clustering and inequality across scales. The repository includes spatial-model outputs and analytical tools for studying the inequality horizon, alongside the computational material for <a href="https://doi.org/10.1038/s44260-025-00054-y">Fractal clusters and urban scaling shape spatial inequality in U.S. patenting</a> (2025). The map above shows geographical clustering in biotechnology patenting.
+    </p>
+
+    <h2>Chimera: Physics-Based Simulations</h2>
+    <p>
+        Chimera combines evolutionary dynamics with a physically embodied simulation of cells in a fluid environment. Evolving adhesion between cells and their surroundings produces aggregation and spatial segregation; changes in nutrient flow then allow ecosystem engineering to emerge. These transitions show how physical constraints and ecological interactions can shape the organization of evolving populations.
+    </p>
+    <p>
+        <a href="{{ '/teach/CHIMERA_simulation.mp4' | relative_url }}">Watch the Chimera simulation</a> to see the emergence of spatial and ecological structure.
+    </p>
+
     <h2>Virtual Reality Interfaces for Network Visualization</h2>
     <p><img src="../images/netvr_interface.png" alt="VR Interface"/></p>
     <p>
-        We have also developed real-time virtual reality software for visualizing complex networks and fitness landscapes. The image above shows experiments with a standard PlayStation VR headset (we also tested the HTC Vive Pro).
+        We developed real-time virtual reality interfaces for visualizing complex networks and fitness landscapes, testing them with PlayStation VR and HTC Vive Pro headsets. The image above shows the PlayStation VR experiments.
     </p>
     <p>
-        Check out a 3D stereo rendering example of the Silwood Park food web, which can be viewed with a smartphone VR headset, <a href="https://www.youtube.com/watch?v=TdgS_rpangc">here</a>.
+        The <a href="https://www.youtube.com/watch?v=TdgS_rpangc">Silwood Park food-web video</a> provides a 3D stereo rendering for viewing with a smartphone VR headset.
     </p>
-    
-    <h2>BiMat: Analysis of Bipartite Ecological Networks</h2>
-    <p>
-        BiMat is an open-source MATLAB library designed for analyzing modularity and nestedness in bipartite ecological networks. Developed in collaboration with Cesar Flores, Timothee Poisot, and Joshua Weitz, BiMat offers features such as modularity and nestedness calculations, diversity indices (Shannon and Simpson), null models for creating random bipartite networks, and additional network statistics.
-    </p>
-    <p>
-        Download the source code <a href="https://github.com/cesar7f/BiMat">here</a> and access the documentation <a href="https://bimat.github.io">here</a>.
-    </p>
-    
-    <h2>Chimera: Physics-Based Simulations</h2>
-    <p>
-        Our Chimera system explores "programmable life systems" by combining evolutionary dynamics with physics-based simulation (<a href="https://cslabupf.wordpress.com/2013/12/04/85/">read more</a>). In Chimera, simulations capture the physical embodiment of natural populations to more accurately represent genotype-phenotype relationships. This approach allows the design of new functions within a realistic computational model that considers emergent properties.
-    </p>
-    <p>
-        Future applications for Chimera include microfluidics experiments and hypothesis testing in areas such as tumor growth and angiogenesis.
-    </p>
+
 </div>
