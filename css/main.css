@@ -161,3 +161,20 @@ ul.posts li {
         margin-top: 10px; 
     }
 }
+
+/* Research programmes: scoped to the research page. */
+.research-page { max-width: 1000px; margin: 2rem auto 4rem; }
+.research-page .research-intro { font-size: 1.1em; }
+.research-page section { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #d8dfe7; }
+.research-page h2 { line-height: 1.3; margin-top: .5rem; }
+.research-page .research-media { margin: 1.5rem 0; }
+.research-page .research-media img { width: 100%; height: auto; margin: 0; }
+.research-page .research-media video { max-width: 640px; margin: 0 auto; height: auto; }
+.research-page figcaption { color: #555; font-size: .9em; line-height: 1.5; margin-top: .75rem; }
+.research-page .research-reading { padding-left: 1.25rem; font-size: .95em; }
+.research-page .research-reading li { margin: .5rem 0; }
+@media (max-width: 600px) {
+  .research-page { margin-top: 1.5rem; }
+  .research-page section { margin-top: 2rem; }
+  .research-page h2 { font-size: 1.45em; }
+}
