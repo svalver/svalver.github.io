@@ -57,6 +57,12 @@ img, video, iframe { max-width: 100%; }
     max-width: 100%;
 }
 
+.projects-page img {
+    width: auto;
+    height: auto;
+    max-width: min(100%, 600px);
+}
+
 .responsive-embed {
     position: relative;
     width: 100%;
